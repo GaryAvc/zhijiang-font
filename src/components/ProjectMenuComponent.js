@@ -6,6 +6,8 @@ import {
 	CardTitle,
 	Breadcrumb,
 	BreadcrumbItem,
+	CardText,
+	Button,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
@@ -13,12 +15,21 @@ import { Loading } from './LoadingComponent';
 function RenderMenuItem({ dish, onClick }) {
 	return (
 		<Card>
-			<Link to={`/menu/${dish._id}`}>
-				<CardBody>
+			<CardBody>
+				<Link to={`/menu/${dish._id}`}>
 					<CardTitle>{dish.name}</CardTitle>
-				</CardBody>
-				<CardImg width="100%" src={dish.image} alt={dish.name} />
-			</Link>
+					<CardText>简介 : {dish.description}</CardText>
+					<CardText>内容 : {dish.content}</CardText>
+				</Link>
+				<Button
+					color="primary"
+					size="md"
+					href="/assets/images/bird.jpg"
+					download
+				>
+					下载题目
+				</Button>
+			</CardBody>
 		</Card>
 	);
 }
@@ -26,7 +37,7 @@ function RenderMenuItem({ dish, onClick }) {
 const ProjectMenu = (props) => {
 	const menu = props.dishes.dishes.map((dish) => {
 		return (
-			<div key={dish._id} className="col-12 col-md-5 m-1">
+			<div key={dish._id} className="col-12 col-md-12 m-2">
 				<RenderMenuItem dish={dish} />
 			</div>
 		);
@@ -54,14 +65,23 @@ const ProjectMenu = (props) => {
 				<div className="row">
 					<Breadcrumb>
 						<BreadcrumbItem>
-							<Link to="/home">Home</Link>
+							<Link to="/home">主页</Link>
 						</BreadcrumbItem>
-						<BreadcrumbItem active>Courses</BreadcrumbItem>
+						<BreadcrumbItem active>题目列表</BreadcrumbItem>
 					</Breadcrumb>
 					<div className="col-12">
-						<h3>Courses</h3>
+						<h3>题目列表[初赛/复赛]</h3>
 						<hr />
 					</div>
+				</div>
+				<div className="col-12">
+					<h3>初赛</h3>
+					<hr />
+				</div>
+				<div className="row">{menu}</div>
+				<div className="col-12">
+					<h3>复赛</h3>
+					<hr />
 				</div>
 				<div className="row">{menu}</div>
 			</div>
