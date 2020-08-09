@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Menu from './MenuComponent';
+import About from './AboutComponent';
 import Contact from './ContactComponent';
 import DishDetail from './DishdetailComponent';
 import Favorites from './FavoriteComponent';
@@ -180,12 +181,14 @@ class Main extends Component {
 								path="/aboutus"
 								component={() => <ProjectAbout leaders={this.props.leaders} />}
 							/>
-							<Route
+							<Route path="/menu/:dishId" component={DishWithId} />
+
+							<PrivateRoute
 								exact
 								path="/menu"
 								component={() => <ProjectMenu dishes={this.props.dishes} />}
 							/>
-							<Route path="/menu/:dishId" component={DishWithId} />
+
 							<PrivateRoute
 								exact
 								path="/favorites"
