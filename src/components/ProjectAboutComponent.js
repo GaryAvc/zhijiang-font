@@ -65,74 +65,50 @@ function ProjectAbout(props) {
 			<div className="row">
 				<Breadcrumb>
 					<BreadcrumbItem>
-						<Link to="/home">Home</Link>
+						<Link to="/home">主页</Link>
 					</BreadcrumbItem>
-					<BreadcrumbItem active>About Us</BreadcrumbItem>
+					<BreadcrumbItem active>关于我们</BreadcrumbItem>
 				</Breadcrumb>
 				<div className="col-12">
-					<h3>About Us</h3>
+					<h3>关于我们</h3>
 					<hr />
 				</div>
 			</div>
 
 			<div className="row row-content">
 				<div className="col-12">
-					<h2>Professor Information</h2>
+					<h2>科研人员</h2>
 				</div>
 				<LeaderList leaders={props.leaders} />
 			</div>
 
 			<div className="row row-content">
 				<div className="col-12 col-md-6">
-					<h2>Our History</h2>
+					<h2>我们的历史</h2>
 					<p>
 						<em>
-							Kean faculty and staff are here to help our students succeed.{' '}
+							为认真贯彻落实习近平总书记科技创新思想，深入实施创新驱动发展战略{' '}
 						</em>
 					</p>
 					<p>
-						Kean is dedicated to academic excellence for everyone. Our students
-						benefit from world-class instruction, meaningful research and career
-						opportunities from the humanities to business, the sciences and
-						beyond. Each of our academic programs is designed to prepare you to
-						launch a meaningful career
+						之江实验室是由余杭区重点打造的科研机构 [1]
+						，位于余杭未来科技城的中国（杭州）人工智能小镇。于2017年9月6日上午正式揭牌成立。
+						2018年9月27日获悉，之江实验室的组织架构、建章立制及三年发展规划的编制已完成，
+						首批5个重大攻关项目启动。
 					</p>
 				</div>
 				<div className="col-12 col-md-5">
 					<Card>
-						<CardHeader className="bg-primary text-white">
-							Facts At a Glance
-						</CardHeader>
+						<CardHeader className="bg-primary text-white">简介</CardHeader>
 						<CardBody>
 							<dl className="row p-1">
-								<dt className="col-6">Started</dt>
-								<dd className="col-6">since 1855</dd>
-								<dt className="col-6">Academic staff</dt>
-								<dd className="col-6">1,432</dd>
-								<dt className="col-6">Students</dt>
-								<dd className="col-6">16,633</dd>
-								<dt className="col-6">Motto</dt>
-								<dd className="col-6">Semper Discens</dd>
+								<dt className="col-6">开始于</dt>
+								<dd className="col-6">2017/9/6</dd>
+								<dt className="col-6">重大攻关项目</dt>
+								<dd className="col-6">5个</dd>
+								<dt className="col-6">研究人员</dt>
+								<dd className="col-6">1,029人</dd>
 							</dl>
-						</CardBody>
-					</Card>
-				</div>
-				<div className="col-12 motto">
-					<Card>
-						<CardBody className="bg-faded">
-							<blockquote className="blockquote">
-								<p className="mb-0">
-									You better cut the pizza in four pieces because I'm not hungry
-									enough to eat six.
-								</p>
-								<footer className="blockquote-footer">
-									Yogi Berra,
-									<cite title="Source Title">
-										The Wit and Wisdom of Yogi Berra, P. Pepe, Diversion Books,
-										2014
-									</cite>
-								</footer>
-							</blockquote>
 						</CardBody>
 					</Card>
 				</div>
