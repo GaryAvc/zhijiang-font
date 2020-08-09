@@ -31,27 +31,26 @@ function RenderDish({ dish, favorite, postFavorite }) {
 				}}
 			>
 				<Card>
-					<CardImg top src={dish.image} alt={dish.name} />
-					<CardImgOverlay>
-						<Button
-							outline
-							color="primary"
-							onClick={() =>
-								favorite
-									? console.log('Already favorite')
-									: postFavorite(dish._id)
-							}
-						>
-							{favorite ? (
-								<span className="fa fa-heart"></span>
-							) : (
-								<span className="fa fa-heart-o"></span>
-							)}
-						</Button>
-					</CardImgOverlay>
+					<Button
+						outline
+						color="primary"
+						onClick={() =>
+							favorite
+								? console.log('Already favorite')
+								: postFavorite(dish._id)
+						}
+					>
+						{favorite ? (
+							<span className="fa fa-heart"></span>
+						) : (
+							<span className="fa fa-heart-o"></span>
+						)}
+					</Button>
+
 					<CardBody>
 						<CardTitle>{dish.name}</CardTitle>
-						<CardText>{dish.professor}</CardText>
+						<CardText>{dish.description}</CardText>
+						<CardText>{dish.content}</CardText>
 					</CardBody>
 				</Card>
 			</FadeTransform>
@@ -63,7 +62,7 @@ function RenderComments({ comments, postComment, dishId }) {
 	if (comments != null)
 		return (
 			<div className="col-12 col-md-5 m-1">
-				<h4>Comments</h4>
+				<h4>评论</h4>
 				<ul className="list-unstyled">
 					<Stagger in>
 						{comments.map((comment) => {
@@ -71,7 +70,7 @@ function RenderComments({ comments, postComment, dishId }) {
 								<Fade in key={comment._id}>
 									<li>
 										<p>{comment.comment}</p>
-										<p>{comment.rating} stars</p>
+										<p>{comment.rating} 分</p>
 										<p>
 											-- {comment.author.firstname} {comment.author.lastname} ,{' '}
 											{new Intl.DateTimeFormat('en-US', {
@@ -122,15 +121,15 @@ class CommentForm extends Component {
 		return (
 			<div>
 				<Button outline onClick={this.toggleModal}>
-					<span className="fa fa-pencil fa-lg"></span> Submit Comment
+					<span className="fa fa-pencil fa-lg"></span> 提交评论
 				</Button>
 				<Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-					<ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
+					<ModalHeader toggle={this.toggleModal}>提交评论</ModalHeader>
 					<ModalBody>
 						<LocalForm onSubmit={(values) => this.handleSubmit(values)}>
 							<Row className="form-group">
 								<Col>
-									<Label htmlFor="rating">Rating</Label>
+									<Label htmlFor="rating">评分</Label>
 									<Control.select
 										model=".rating"
 										id="rating"
@@ -146,7 +145,7 @@ class CommentForm extends Component {
 							</Row>
 							<Row className="form-group">
 								<Col>
-									<Label htmlFor="comment">Comment</Label>
+									<Label htmlFor="comment">评论</Label>
 									<Control.textarea
 										model=".comment"
 										id="comment"
@@ -156,7 +155,7 @@ class CommentForm extends Component {
 								</Col>
 							</Row>
 							<Button type="submit" className="bg-primary">
-								Submit
+								提交
 							</Button>
 						</LocalForm>
 					</ModalBody>
@@ -189,7 +188,7 @@ const DishDetail = (props) => {
 				<div className="row">
 					<Breadcrumb>
 						<BreadcrumbItem>
-							<Link to="/menu">Register System</Link>
+							<Link to="/menu">题目</Link>
 						</BreadcrumbItem>
 						<BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
 					</Breadcrumb>
