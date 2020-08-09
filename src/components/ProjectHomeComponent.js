@@ -43,26 +43,8 @@ function ProjectHome(props) {
 							<Link to={'/menu'}>
 								<CardImg src={'assets/images/arrange.gif'} alt={'register'} />
 								<CardBody>
-									<CardTitle>{'Register'}</CardTitle>
-									<CardText>{'Register Now'}</CardText>
-								</CardBody>
-							</Link>
-						</Card>
-					</FadeTransform>
-				</div>
-				<div className="col-12 col-md m-1">
-					<FadeTransform
-						in
-						transformProps={{
-							exitTransform: 'scale(0.5) translateY(-50%)',
-						}}
-					>
-						<Card>
-							<Link to={'/favorites'}>
-								<CardImg src={'assets/images/register.gif'} alt={'arrange'} />
-								<CardBody>
-									<CardTitle>{'Arrange'}</CardTitle>
-									<CardText>{'Arrange your courses Now'}</CardText>
+									<CardTitle>{'查看题目'}</CardTitle>
+									<CardText>{'查看题目和相关信息！'}</CardText>
 								</CardBody>
 							</Link>
 						</Card>
@@ -77,15 +59,31 @@ function ProjectHome(props) {
 					>
 						<Card>
 							<Link to={'/aboutus'}>
+								<CardImg src={'assets/images/register.gif'} alt={'arrange'} />
+								<CardBody>
+									<CardTitle>{'联系我们'}</CardTitle>
+									<CardText>{'查看关于之江实验室的更多信息'}</CardText>
+								</CardBody>
+							</Link>
+						</Card>
+					</FadeTransform>
+				</div>
+				<div className="col-12 col-md m-1">
+					<FadeTransform
+						in
+						transformProps={{
+							exitTransform: 'scale(0.5) translateY(-50%)',
+						}}
+					>
+						<Card>
+							<Link to={'/contactus'}>
 								<CardImg
 									src={'assets/images/professor.gif'}
 									alt={'professor'}
 								/>
 								<CardBody>
-									<CardTitle>{'See Professor Info'}</CardTitle>
-									<CardText>
-										{'Check out your professor information Now'}
-									</CardText>
+									<CardTitle>{'排行榜'}</CardTitle>
+									<CardText>{'查看最新排行'}</CardText>
 								</CardBody>
 							</Link>
 						</Card>
