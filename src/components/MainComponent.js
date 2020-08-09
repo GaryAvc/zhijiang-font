@@ -28,6 +28,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import ProjectHome from './ProjectHomeComponent';
 import ProjectMenu from './ProjectMenuComponent';
 import ProjectAbout from './ProjectAboutComponent';
+import { Card, CardTitle, CardBody, CardImg } from 'reactstrap';
 
 const mapStateToProps = (state) => {
 	return {
@@ -149,12 +150,11 @@ class Main extends Component {
 					this.props.auth.isAuthenticated ? (
 						<Component {...props} />
 					) : (
-						<Redirect
-							to={{
-								pathname: '/home',
-								state: { from: props.location },
-							}}
-						/>
+						<Card>
+							<CardBody>
+								<CardTitle>请先登录，以此查看更多信息。</CardTitle>
+							</CardBody>
+						</Card>
 					)
 				}
 			/>
