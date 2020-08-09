@@ -180,7 +180,6 @@ class Main extends Component {
 								path="/aboutus"
 								component={() => <ProjectAbout leaders={this.props.leaders} />}
 							/>
-							} />
 							<Route
 								exact
 								path="/menu"
