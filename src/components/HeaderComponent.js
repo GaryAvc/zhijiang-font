@@ -101,7 +101,7 @@ class Header extends Component {
 								</NavItem>
 								<NavItem>
 									<NavLink className="nav-link" to="/contactus">
-										<span className="fa fa-address-card fa-lg"></span> 联系我们
+										<span className="fa fa-address-card fa-lg"></span> 排行榜
 									</NavLink>
 								</NavItem>
 							</Nav>

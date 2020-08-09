@@ -28,6 +28,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import ProjectHome from './ProjectHomeComponent';
 import ProjectMenu from './ProjectMenuComponent';
 import ProjectAbout from './ProjectAboutComponent';
+import Ranking from './RankingComponent';
 import { Card, CardTitle, CardBody, CardImg } from 'reactstrap';
 
 const mapStateToProps = (state) => {
@@ -211,7 +212,7 @@ class Main extends Component {
 								exact
 								path="/contactus"
 								component={() => (
-									<Contact
+									<Ranking
 										resetFeedbackForm={this.props.resetFeedbackForm}
 										postFeedback={this.props.postFeedback}
 									/>
