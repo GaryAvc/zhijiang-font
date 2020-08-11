@@ -36,7 +36,7 @@ function RenderDish({ record }) {
 }
 
 const DishDetail = (props) => {
-	const record = props.records.records.map((record) => {
+	const singleRecord = props.records.records.map((record) => {
 		return (
 			<div key={record._id} className="col-12 col-md-12 m-1">
 				<RenderDish record={record} />
@@ -85,7 +85,7 @@ const DishDetail = (props) => {
 								<th>时间</th>
 							</tr>
 						</thead>
-						<tbody>{record}</tbody>
+						<tbody>{singleRecord}</tbody>
 					</Table>
 				</div>
 			</div>

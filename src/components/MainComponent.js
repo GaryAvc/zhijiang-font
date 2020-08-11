@@ -21,6 +21,7 @@ import {
 	googleLogin,
 	postFavorite,
 	deleteFavorite,
+	fetchRecords,
 } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -39,10 +40,14 @@ const mapStateToProps = (state) => {
 		leaders: state.leaders,
 		favorites: state.favorites,
 		auth: state.auth,
+		records: state.records,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => ({
+	fetchRecords: () => {
+		dispatch(fetchRecords());
+	},
 	postComment: (dishId, rating, comment) =>
 		dispatch(postComment(dishId, rating, comment)),
 	fetchDishes: () => {
@@ -70,6 +75,7 @@ const mapDispatchToProps = (dispatch) => ({
 class Main extends Component {
 	componentDidMount() {
 		this.props.fetchDishes();
+		this.props.fetchRecords();
 		this.props.fetchComments();
 		this.props.fetchPromos();
 		this.props.fetchLeaders();
@@ -111,17 +117,9 @@ class Main extends Component {
 							(dish) => dish._id === match.params.dishId
 						)[0]
 					}
+					records={this.props.records}
 					isLoading={this.props.dishes.isLoading}
 					errMess={this.props.dishes.errMess}
-					comments={this.props.comments.comments.filter(
-						(comment) => comment.dish === match.params.dishId
-					)}
-					commentsErrMess={this.props.comments.errMess}
-					postComment={this.props.postComment}
-					favorite={this.props.favorites.favorites.dishes.some(
-						(dish) => dish === match.params.dishId
-					)}
-					postFavorite={this.props.postFavorite}
 				/>
 			) : (
 				<DishDetail
@@ -130,15 +128,9 @@ class Main extends Component {
 							(dish) => dish._id === match.params.dishId
 						)[0]
 					}
+					records={this.props.records}
 					isLoading={this.props.dishes.isLoading}
 					errMess={this.props.dishes.errMess}
-					comments={this.props.comments.comments.filter(
-						(comment) => comment.dish === match.params.dishId
-					)}
-					commentsErrMess={this.props.comments.errMess}
-					postComment={this.props.postComment}
-					favorite={false}
-					postFavorite={this.props.postFavorite}
 				/>
 			);
 		};
