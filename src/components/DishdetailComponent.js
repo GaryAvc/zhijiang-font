@@ -22,15 +22,15 @@ import { Control, LocalForm } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
-function RenderDish({ dish, favorite, postFavorite }) {
+function RenderDish({ record }) {
 	return (
 		<div className="col-12 col-md-5 m-1">
 			<tbody>
 				<tr>
-					<th scope="row">3</th>
-					<td>Larry</td>
-					<td>the Bird</td>
-					<td>@twitter</td>
+					<th scope="row">{record.id}</th>
+					<td>{record.name}</td>
+					<td>{record.score}</td>
+					<td>{record.time}</td>
 				</tr>
 			</tbody>
 		</div>
@@ -38,10 +38,10 @@ function RenderDish({ dish, favorite, postFavorite }) {
 }
 
 const DishDetail = (props) => {
-	const record = props.dishes.dishes.map((dish) => {
+	const record = props.records.records.map((record) => {
 		return (
-			<div key={dish._id} className="col-12 col-md-12 m-1">
-				<RenderDish dish={dish} />
+			<div key={record._id} className="col-12 col-md-12 m-1">
+				<RenderDish record={record} />
 			</div>
 		);
 	});
@@ -77,7 +77,19 @@ const DishDetail = (props) => {
 						<hr />
 					</div>
 				</div>
-				<div className="row">{record}</div>
+				<div className="row">
+					<Table>
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Username</th>
+							</tr>
+						</thead>
+						{record}
+					</Table>
+				</div>
 			</div>
 		);
 	else return <div></div>;
