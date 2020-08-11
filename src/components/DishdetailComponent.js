@@ -58,113 +58,6 @@ function RenderDish({ dish, favorite, postFavorite }) {
 	);
 }
 
-function RenderComments({ comments, postComment, dishId }) {
-	if (comments != null)
-		return (
-			<div className="col-12 col-md-5 m-1">
-				<h4>评论</h4>
-				<ul className="list-unstyled">
-					<Stagger in>
-						{comments.map((comment) => {
-							return (
-								<Fade in key={comment._id}>
-									<li>
-										<p>{comment.comment}</p>
-										<p>{comment.rating} 分</p>
-										<p>
-											-- {comment.author.firstname} {comment.author.lastname} ,{' '}
-											{new Intl.DateTimeFormat('en-US', {
-												year: 'numeric',
-												month: 'short',
-												day: '2-digit',
-											}).format(
-												new Date(Date.parse(comment.updatedAt.toDate()))
-											)}
-										</p>
-									</li>
-								</Fade>
-							);
-						})}
-					</Stagger>
-				</ul>
-				<CommentForm dishId={dishId} postComment={postComment} />
-			</div>
-		);
-	else return <div></div>;
-}
-
-class CommentForm extends Component {
-	constructor(props) {
-		super(props);
-
-		this.toggleModal = this.toggleModal.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-
-		this.state = {
-			isNavOpen: false,
-			isModalOpen: false,
-		};
-	}
-
-	toggleModal() {
-		this.setState({
-			isModalOpen: !this.state.isModalOpen,
-		});
-	}
-
-	handleSubmit(values) {
-		this.toggleModal();
-		this.props.postComment(this.props.dishId, values.rating, values.comment);
-	}
-
-	render() {
-		return (
-			<div>
-				<Button outline onClick={this.toggleModal}>
-					<span className="fa fa-pencil fa-lg"></span> 提交评论
-				</Button>
-				<Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-					<ModalHeader toggle={this.toggleModal}>提交评论</ModalHeader>
-					<ModalBody>
-						<LocalForm onSubmit={(values) => this.handleSubmit(values)}>
-							<Row className="form-group">
-								<Col>
-									<Label htmlFor="rating">评分</Label>
-									<Control.select
-										model=".rating"
-										id="rating"
-										className="form-control"
-									>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-									</Control.select>
-								</Col>
-							</Row>
-							<Row className="form-group">
-								<Col>
-									<Label htmlFor="comment">评论</Label>
-									<Control.textarea
-										model=".comment"
-										id="comment"
-										rows="6"
-										className="form-control"
-									/>
-								</Col>
-							</Row>
-							<Button type="submit" className="bg-primary">
-								提交
-							</Button>
-						</LocalForm>
-					</ModalBody>
-				</Modal>
-			</div>
-		);
-	}
-}
-
 const DishDetail = (props) => {
 	if (props.isLoading) {
 		return (
@@ -202,11 +95,6 @@ const DishDetail = (props) => {
 						dish={props.dish}
 						favorite={props.favorite}
 						postFavorite={props.postFavorite}
-					/>
-					<RenderComments
-						comments={props.comments}
-						postComment={props.postComment}
-						dishId={props.dish._id}
 					/>
 				</div>
 			</div>
