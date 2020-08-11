@@ -25,14 +25,12 @@ import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 function RenderDish({ record }) {
 	return (
 		<div className="col-12 col-md-5 m-1">
-			<tbody>
-				<tr>
-					<th scope="row">{record.id}</th>
-					<td>{record.name}</td>
-					<td>{record.score}</td>
-					<td>{record.time}</td>
-				</tr>
-			</tbody>
+			<tr>
+				<th scope="row">{record.id}</th>
+				<td>{record.name}</td>
+				<td>{record.score}</td>
+				<td>{record.time}</td>
+			</tr>
 		</div>
 	);
 }
@@ -82,12 +80,12 @@ const DishDetail = (props) => {
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>First Name</th>
-								<th>Last Name</th>
-								<th>Username</th>
+								<th>名称</th>
+								<th>得分</th>
+								<th>时间</th>
 							</tr>
 						</thead>
-						{record}
+						<tbody>{record}</tbody>
 					</Table>
 				</div>
 			</div>
