@@ -188,14 +188,17 @@ class Header extends Component {
 									记住我
 								</Label>
 							</FormGroup>
-							<Button type="submit" value="submit" color="primary">
+							<Button
+								className=" m-2"
+								type="submit"
+								value="submit"
+								color="primary"
+								block
+							>
 								登录
 							</Button>
 						</Form>
 						<p></p>
-						<Button color="danger" onClick={this.handleGoogleLogin}>
-							<span className="fa fa-google fa-lg"></span> 用Google登录
-						</Button>
 					</ModalBody>
 				</Modal>
 			</React.Fragment>
