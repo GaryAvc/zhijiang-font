@@ -50,24 +50,7 @@ function ProjectHome(props) {
 						</Card>
 					</FadeTransform>
 				</div>
-				<div className="col-12 col-md m-1">
-					<FadeTransform
-						in
-						transformProps={{
-							exitTransform: 'scale(0.5) translateY(-50%)',
-						}}
-					>
-						<Card>
-							<Link to={'/aboutus'}>
-								<CardImg src={'assets/images/register.gif'} alt={'arrange'} />
-								<CardBody>
-									<CardTitle>{'联系我们'}</CardTitle>
-									<CardText>{'查看关于之江实验室的更多信息'}</CardText>
-								</CardBody>
-							</Link>
-						</Card>
-					</FadeTransform>
-				</div>
+
 				<div className="col-12 col-md m-1">
 					<FadeTransform
 						in
@@ -84,6 +67,24 @@ function ProjectHome(props) {
 								<CardBody>
 									<CardTitle>{'排行榜'}</CardTitle>
 									<CardText>{'查看最新排行'}</CardText>
+								</CardBody>
+							</Link>
+						</Card>
+					</FadeTransform>
+				</div>
+				<div className="col-12 col-md m-1">
+					<FadeTransform
+						in
+						transformProps={{
+							exitTransform: 'scale(0.5) translateY(-50%)',
+						}}
+					>
+						<Card>
+							<Link to={'/aboutus'}>
+								<CardImg src={'assets/images/register.gif'} alt={'arrange'} />
+								<CardBody>
+									<CardTitle>{'关于我们'}</CardTitle>
+									<CardText>{'查看关于之江实验室的更多信息'}</CardText>
 								</CardBody>
 							</Link>
 						</Card>
