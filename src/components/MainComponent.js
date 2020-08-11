@@ -184,18 +184,18 @@ class Main extends Component {
 							/>
 							<Route path="/menu/:dishId" component={DishWithId} />
 
-							<PrivateRoute
-								exact
-								path="/menu"
-								component={() => <ProjectMenu dishes={this.props.dishes} />}
-							/>
-
-							{/* Todo: delete later */}
-							{/* <Route
+							{/* <PrivateRoute
 								exact
 								path="/menu"
 								component={() => <ProjectMenu dishes={this.props.dishes} />}
 							/> */}
+
+							{/* Todo: delete later */}
+							<Route
+								exact
+								path="/menu"
+								component={() => <ProjectMenu dishes={this.props.dishes} />}
+							/>
 
 							<PrivateRoute
 								exact

@@ -16,19 +16,30 @@ function RenderMenuItem({ dish, onClick }) {
 	return (
 		<Card>
 			<CardBody>
-				<Link to={`/menu/${dish._id}`}>
-					<CardTitle>{dish.name}</CardTitle>
-					<CardText>简介 : {dish.description}</CardText>
-					<CardText>内容 : {dish.content}</CardText>
-				</Link>
+				<CardTitle>{dish.name}</CardTitle>
+				<CardText>简介 : {dish.description}</CardText>
+				<CardText>内容 : {dish.content}</CardText>
+
 				<Button
 					color="primary"
 					size="md"
+					className=" col-md-5 m-2"
 					href="/assets/images/bird.jpg"
 					download
 				>
 					下载题目
 				</Button>
+				<Link to={`/menu/${dish._id}`}>
+					<Button
+						color="primary"
+						size="md"
+						className="col-md-5 m-2"
+						href="/assets/images/bird.jpg"
+						download
+					>
+						提交记录
+					</Button>
+				</Link>
 			</CardBody>
 		</Card>
 	);
