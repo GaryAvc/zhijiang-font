@@ -24,36 +24,13 @@ import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 function RenderDish({ dish, favorite, postFavorite }) {
 	return (
 		<div className="col-12 col-md-5 m-1">
-			<FadeTransform
-				in
-				transformProps={{
-					exitTransform: 'scale(0.5) translateY(-50%)',
-				}}
-			>
-				<Card>
-					<Button
-						outline
-						color="primary"
-						onClick={() =>
-							favorite
-								? console.log('Already favorite')
-								: postFavorite(dish._id)
-						}
-					>
-						{favorite ? (
-							<span className="fa fa-heart"></span>
-						) : (
-							<span className="fa fa-heart-o"></span>
-						)}
-					</Button>
-
-					<CardBody>
-						<CardTitle>{dish.name}</CardTitle>
-						<CardText>{dish.description}</CardText>
-						<CardText>{dish.content}</CardText>
-					</CardBody>
-				</Card>
-			</FadeTransform>
+			<Card>
+				<CardBody>
+					<CardTitle>{dish.name}</CardTitle>
+					<CardText>{dish.description}</CardText>
+					<CardText>{dish.content}</CardText>
+				</CardBody>
+			</Card>
 		</div>
 	);
 }
