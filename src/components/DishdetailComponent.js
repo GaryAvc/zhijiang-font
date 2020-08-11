@@ -15,6 +15,7 @@ import {
 	Button,
 	Row,
 	Col,
+	Table,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm } from 'react-redux-form';
@@ -24,18 +25,27 @@ import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 function RenderDish({ dish, favorite, postFavorite }) {
 	return (
 		<div className="col-12 col-md-5 m-1">
-			<Card>
-				<CardBody>
-					<CardTitle>{dish.name}</CardTitle>
-					<CardText>{dish.description}</CardText>
-					<CardText>{dish.content}</CardText>
-				</CardBody>
-			</Card>
+			<tbody>
+				<tr>
+					<th scope="row">3</th>
+					<td>Larry</td>
+					<td>the Bird</td>
+					<td>@twitter</td>
+				</tr>
+			</tbody>
 		</div>
 	);
 }
 
 const DishDetail = (props) => {
+	const record = props.dishes.dishes.map((dish) => {
+		return (
+			<div key={dish._id} className="col-12 col-md-12 m-1">
+				<RenderDish dish={dish} />
+			</div>
+		);
+	});
+
 	if (props.isLoading) {
 		return (
 			<div className="container">
@@ -67,13 +77,7 @@ const DishDetail = (props) => {
 						<hr />
 					</div>
 				</div>
-				<div className="row">
-					<RenderDish
-						dish={props.dish}
-						favorite={props.favorite}
-						postFavorite={props.postFavorite}
-					/>
-				</div>
+				<div className="row">{record}</div>
 			</div>
 		);
 	else return <div></div>;
