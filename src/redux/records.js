@@ -1,31 +1,31 @@
 import * as ActionTypes from './ActionTypes';
 
-export const Dishes = (
+export const Records = (
 	state = {
 		isLoading: true,
 		errMess: null,
-		dishes: [],
+		records: [],
 	},
 	action
 ) => {
 	switch (action.type) {
-		case ActionTypes.ADD_DISHES:
+		case ActionTypes.ADD_RECORDS:
 			return {
 				...state,
 				isLoading: false,
 				errMess: null,
-				dishes: action.payload,
+				records: action.payload,
 			};
 
-		case ActionTypes.DISHES_LOADING:
-			return { ...state, isLoading: true, errMess: null, dishes: [] };
+		case ActionTypes.RECORDS_LOADING:
+			return { ...state, isLoading: true, errMess: null, records: [] };
 
-		case ActionTypes.DISHES_FAILED:
+		case ActionTypes.RECORDS_FAILED:
 			return {
 				...state,
 				isLoading: false,
 				errMess: action.payload,
-				dishes: [],
+				records: [],
 			};
 
 		default:

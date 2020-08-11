@@ -23,25 +23,30 @@ import { Loading } from './LoadingComponent';
 import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderDish({ record }) {
+	const timestamp = record.time;
+
+	var formattedTimestamp = Intl.DateTimeFormat('en-US', {
+		year: 'numeric',
+		month: 'short',
+		day: '2-digit',
+		hour: 'numeric',
+		minute: '2-digit',
+		second: '2-digit',
+	}).format(timestamp);
+	// Outputs the date and time in Mon dd, YYYY, H:MM:SS AM/PM format
 	return (
-		<div className="col-12 col-md-5 m-1">
-			<tr>
-				<th scope="row">{record.id}</th>
-				<td>{record.name}</td>
-				<td>{record.score}</td>
-				<td>{record.time}</td>
-			</tr>
-		</div>
+		<tr>
+			<th scope="row">{record.id}</th>
+			<td>{record.name}</td>
+			<td>{record.score}</td>
+			<td>{formattedTimestamp}</td>
+		</tr>
 	);
 }
 
 const DishDetail = (props) => {
 	const singleRecord = props.records.records.map((record) => {
-		return (
-			<div key={record._id} className="col-12 col-md-12 m-1">
-				<RenderDish record={record} />
-			</div>
-		);
+		return <RenderDish record={record} />;
 	});
 
 	if (props.isLoading) {
@@ -78,12 +83,10 @@ const DishDetail = (props) => {
 				<div className="row">
 					<Table>
 						<thead>
-							<tr>
-								<th>#</th>
-								<th>名称</th>
-								<th>得分</th>
-								<th>时间</th>
-							</tr>
+							<th>#</th>
+							<th>名称</th>
+							<th>得分</th>
+							<th>时间</th>
 						</thead>
 						<tbody>{singleRecord}</tbody>
 					</Table>
