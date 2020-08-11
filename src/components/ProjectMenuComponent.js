@@ -70,7 +70,7 @@ const ProjectMenu = (props) => {
 						<BreadcrumbItem active>题目列表</BreadcrumbItem>
 					</Breadcrumb>
 					<div className="col-12">
-						<h3>题目列表[初赛/复赛]</h3>
+						<h3>题目列表[初赛/决赛]</h3>
 						<hr />
 					</div>
 				</div>
@@ -80,7 +80,17 @@ const ProjectMenu = (props) => {
 				</div>
 				<div className="row">{menu}</div>
 				<div className="col-12">
-					<h3>复赛</h3>
+					<h3>A卷</h3>
+					<hr />
+				</div>
+				<div className="row">{menu}</div>
+				<div className="col-12">
+					<h3>B卷</h3>
+					<hr />
+				</div>
+				<div className="row">{menu}</div>
+				<div className="col-12">
+					<h3>决赛</h3>
 					<hr />
 				</div>
 				<div className="row">{menu}</div>
