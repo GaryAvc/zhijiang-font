@@ -84,24 +84,20 @@ class Header extends Component {
 										<span className="fa fa-home fa-lg"></span> 主页
 									</NavLink>
 								</NavItem>
-								<NavItem>
-									<NavLink className="nav-link" to="/aboutus">
-										<span className="fa fa-info fa-lg"></span> 关于我们
-									</NavLink>
-								</NavItem>
+
 								<NavItem>
 									<NavLink className="nav-link" to="/menu">
 										<span className="fa fa-list fa-lg"></span> 查看题目
 									</NavLink>
 								</NavItem>
 								<NavItem>
-									<NavLink className="nav-link" to="/favorites">
-										<span className="fa fa-heart fa-lg"></span> 我的收藏
+									<NavLink className="nav-link" to="/contactus">
+										<span className="fa fa-address-card fa-lg"></span> 排行榜
 									</NavLink>
 								</NavItem>
 								<NavItem>
-									<NavLink className="nav-link" to="/contactus">
-										<span className="fa fa-address-card fa-lg"></span> 排行榜
+									<NavLink className="nav-link" to="/aboutus">
+										<span className="fa fa-info fa-lg"></span> 关于我们
 									</NavLink>
 								</NavItem>
 							</Nav>
