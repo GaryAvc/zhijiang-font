@@ -15,7 +15,7 @@ function RenderDish({ record }) {
 }
 
 const Ranking = (props) => {
-	const singleRecord = props.records.records.map((record) => {
+	const singleRecord = props.ranks.ranks.map((record) => {
 		return <RenderDish record={record} />;
 	});
 

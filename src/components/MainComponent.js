@@ -202,7 +202,7 @@ class Main extends Component {
 							<Route
 								exact
 								path="/contactus"
-								component={() => <Ranking records={this.props.records} />}
+								component={() => <Ranking ranks={this.props.ranks} />}
 							/>
 							<Redirect to="/home" />
 						</Switch>
