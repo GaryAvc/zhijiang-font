@@ -202,12 +202,7 @@ class Main extends Component {
 							<Route
 								exact
 								path="/contactus"
-								component={() => (
-									<Ranking
-										resetFeedbackForm={this.props.resetFeedbackForm}
-										postFeedback={this.props.postFeedback}
-									/>
-								)}
+								component={() => <Ranking records={this.props.records} />}
 							/>
 							<Redirect to="/home" />
 						</Switch>
