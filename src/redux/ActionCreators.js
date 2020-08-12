@@ -88,6 +88,23 @@ export const fetchRecords = () => (dispatch) => {
 		.catch((error) => dispatch(dishesFailed(error.message)));
 };
 
+export const fetchRanks = () => (dispatch) => {
+	return firestore
+		.collection('ranks')
+		.get()
+		.then((snapshot) => {
+			let ranks = [];
+			snapshot.forEach((doc) => {
+				const data = doc.data();
+				const _id = doc.id;
+				ranks.push({ _id, ...data });
+			});
+			return ranks;
+		})
+		.then((ranks) => dispatch(addRanks(ranks)))
+		.catch((error) => dispatch(dishesFailed(error.message)));
+};
+
 export const dishesLoading = () => ({
 	type: ActionTypes.DISHES_LOADING,
 });
@@ -105,6 +122,11 @@ export const addDishes = (dishes) => ({
 export const addRecords = (records) => ({
 	type: ActionTypes.ADD_RECORDS,
 	payload: records,
+});
+
+export const addRanks = (ranks) => ({
+	type: ActionTypes.ADD_RANKS,
+	payload: ranks,
 });
 
 export const fetchComments = () => (dispatch) => {

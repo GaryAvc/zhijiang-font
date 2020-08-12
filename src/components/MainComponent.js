@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import Menu from './MenuComponent';
-import About from './AboutComponent';
-import Contact from './ContactComponent';
 import DishDetail from './DishdetailComponent';
 import Favorites from './FavoriteComponent';
 import Header from './HeaderComponent';
@@ -22,6 +19,7 @@ import {
 	postFavorite,
 	deleteFavorite,
 	fetchRecords,
+	fetchRanks,
 } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -41,12 +39,16 @@ const mapStateToProps = (state) => {
 		favorites: state.favorites,
 		auth: state.auth,
 		records: state.records,
+		ranks: state.ranks,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => ({
 	fetchRecords: () => {
 		dispatch(fetchRecords());
+	},
+	fetchRanks: () => {
+		dispatch(fetchRanks());
 	},
 	postComment: (dishId, rating, comment) =>
 		dispatch(postComment(dishId, rating, comment)),
@@ -76,6 +78,7 @@ class Main extends Component {
 	componentDidMount() {
 		this.props.fetchDishes();
 		this.props.fetchRecords();
+		this.props.fetchRanks();
 		this.props.fetchComments();
 		this.props.fetchPromos();
 		this.props.fetchLeaders();

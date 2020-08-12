@@ -10,6 +10,7 @@ import { Records } from './records';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { InitialFeedback } from './forms';
+import { Ranks } from './ranks';
 
 export const ConfigureStore = () => {
 	const store = createStore(
@@ -20,6 +21,7 @@ export const ConfigureStore = () => {
 			leaders: Leaders,
 			auth: Auth,
 			records: Records,
+			ranks: Ranks,
 			...createForms({
 				feedback: InitialFeedback,
 			}),
