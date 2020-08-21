@@ -1,26 +1,7 @@
 import React, { Component } from 'react';
-import {
-	Card,
-	CardImg,
-	CardImgOverlay,
-	CardText,
-	CardBody,
-	CardTitle,
-	Breadcrumb,
-	BreadcrumbItem,
-	Label,
-	Modal,
-	ModalHeader,
-	ModalBody,
-	Button,
-	Row,
-	Col,
-	Table,
-} from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Control, LocalForm } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
-import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderDish({ record }) {
 	const timestamp = record.time;
