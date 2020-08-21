@@ -2,7 +2,7 @@ import * as ActionTypes from './ActionTypes';
 import { auth, firestore, fireauth, firebasestore } from '../firebase/firebase';
 
 import md5 from 'md5';
-import { baseUrl } from '../shared/baseUrl';
+import { baseUrl, preTestUrl, finalTestUrl } from '../shared/baseUrl';
 
 export const requestLogin = (creds) => {
 	return {
@@ -116,7 +116,7 @@ export const fetchDishes = () => (dispatch) => {
 
 	//http://10.0.104.86:8081/listCases?phaseType=1
 
-	return fetch(baseUrl + 'listCases?phaseType=0')
+	return fetch(baseUrl + preTestUrl)
 		.then((response) => response.json())
 		.then((dishes) => dispatch(addDishes(dishes.data)))
 		.catch((error) => dispatch(dishesFailed(error.message)));
