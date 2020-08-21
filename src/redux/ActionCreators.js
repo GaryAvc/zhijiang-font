@@ -1,6 +1,76 @@
 import * as ActionTypes from './ActionTypes';
 import { auth, firestore, fireauth, firebasestore } from '../firebase/firebase';
 
+/*
+	todo: change the firebase server to ip address server
+*/
+
+export const requestLogin = () => {
+	return {
+		type: ActionTypes.LOGIN_REQUEST,
+	};
+};
+
+export const receiveLogin = (user) => {
+	return {
+		type: ActionTypes.LOGIN_SUCCESS,
+		user,
+	};
+};
+
+export const loginError = (message) => {
+	return {
+		type: ActionTypes.LOGIN_FAILURE,
+		message,
+	};
+};
+
+export const loginUser = (creds) => (dispatch) => {
+	// We dispatch requestLogin to kickoff the call to the API
+	dispatch(requestLogin(creds));
+
+	return auth
+		.signInWithEmailAndPassword(creds.username, creds.password)
+		.then(() => {
+			var user = auth.currentUser;
+			localStorage.setItem('user', JSON.stringify(user));
+			// Dispatch the success action
+			dispatch(fetchFavorites());
+			dispatch(receiveLogin(user));
+		})
+		.catch((error) => dispatch(loginError(error.message)));
+};
+
+export const requestLogout = () => {
+	return {
+		type: ActionTypes.LOGOUT_REQUEST,
+	};
+};
+
+export const receiveLogout = () => {
+	return {
+		type: ActionTypes.LOGOUT_SUCCESS,
+	};
+};
+
+// Logs the user out
+export const logoutUser = () => (dispatch) => {
+	dispatch(requestLogout());
+	auth
+		.signOut()
+		.then(() => {
+			// Sign-out successful.
+		})
+		.catch((error) => {
+			// An error happened.
+		});
+	localStorage.removeItem('user');
+	dispatch(favoritesFailed('Error 401: Unauthorized'));
+	dispatch(receiveLogout());
+};
+
+//---------- end of LOGIN / LOGOUT part --------------
+
 export const addComment = (comment) => ({
 	type: ActionTypes.ADD_COMMENT,
 	payload: comment,
@@ -234,70 +304,6 @@ export const postFeedback = (feedback) => (dispatch) => {
 			console.log('Feedback', error.message);
 			alert('Your feedback could not be posted\nError: ' + error.message);
 		});
-};
-
-export const requestLogin = () => {
-	return {
-		type: ActionTypes.LOGIN_REQUEST,
-	};
-};
-
-export const receiveLogin = (user) => {
-	return {
-		type: ActionTypes.LOGIN_SUCCESS,
-		user,
-	};
-};
-
-export const loginError = (message) => {
-	return {
-		type: ActionTypes.LOGIN_FAILURE,
-		message,
-	};
-};
-
-export const loginUser = (creds) => (dispatch) => {
-	// We dispatch requestLogin to kickoff the call to the API
-	dispatch(requestLogin(creds));
-
-	return auth
-		.signInWithEmailAndPassword(creds.username, creds.password)
-		.then(() => {
-			var user = auth.currentUser;
-			localStorage.setItem('user', JSON.stringify(user));
-			// Dispatch the success action
-			dispatch(fetchFavorites());
-			dispatch(receiveLogin(user));
-		})
-		.catch((error) => dispatch(loginError(error.message)));
-};
-
-export const requestLogout = () => {
-	return {
-		type: ActionTypes.LOGOUT_REQUEST,
-	};
-};
-
-export const receiveLogout = () => {
-	return {
-		type: ActionTypes.LOGOUT_SUCCESS,
-	};
-};
-
-// Logs the user out
-export const logoutUser = () => (dispatch) => {
-	dispatch(requestLogout());
-	auth
-		.signOut()
-		.then(() => {
-			// Sign-out successful.
-		})
-		.catch((error) => {
-			// An error happened.
-		});
-	localStorage.removeItem('user');
-	dispatch(favoritesFailed('Error 401: Unauthorized'));
-	dispatch(receiveLogout());
 };
 
 export const postFavorite = (dishId) => (dispatch) => {
