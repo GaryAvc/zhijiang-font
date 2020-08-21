@@ -12,13 +12,15 @@ import {
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 
+// todo: start to match to server interface
 function RenderMenuItem({ dish }) {
 	return (
 		<Card>
 			<CardBody>
-				<CardTitle>{dish.name}</CardTitle>
+				<CardTitle>{dish.caseId}</CardTitle>
 				<CardText>简介 : {dish.description}</CardText>
-				<CardText>内容 : {dish.content}</CardText>
+				<CardText>标签 : {dish.caseLabels}</CardText>
+				<CardText>类型 : {dish.examType}</CardText>
 
 				<Button
 					color="primary"
@@ -89,7 +91,6 @@ const ProjectMenu = (props) => {
 					<h3>初赛</h3>
 					<hr />
 				</div>
-				<div className="row">{menu}</div>
 				<div className="col-12">
 					<h3>A卷</h3>
 					<hr />
