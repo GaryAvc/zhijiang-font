@@ -5,16 +5,19 @@ import { auth, firestore, fireauth, firebasestore } from '../firebase/firebase';
 	todo: change the firebase server to ip address server
 */
 
-export const requestLogin = () => {
+import md5 from 'md5';
+
+export const requestLogin = (creds) => {
 	return {
 		type: ActionTypes.LOGIN_REQUEST,
+		creds,
 	};
 };
 
-export const receiveLogin = (user) => {
+export const receiveLogin = (response) => {
 	return {
 		type: ActionTypes.LOGIN_SUCCESS,
-		user,
+		token: response.token,
 	};
 };
 
@@ -25,18 +28,78 @@ export const loginError = (message) => {
 	};
 };
 
+// todo: use md5 to change the username and password to encrypted token
+
 export const loginUser = (creds) => (dispatch) => {
 	// We dispatch requestLogin to kickoff the call to the API
 	dispatch(requestLogin(creds));
 
-	return auth
-		.signInWithEmailAndPassword(creds.username, creds.password)
-		.then(() => {
-			var user = auth.currentUser;
-			localStorage.setItem('user', JSON.stringify(user));
-			// Dispatch the success action
-			dispatch(fetchFavorites());
-			dispatch(receiveLogin(user));
+	/*
+	Req：userName, timestamp, md5(userName+md5(password)+timestamp)
+	*/
+
+	const username = creds.username;
+	const password = creds.password;
+	const timestamp = new Date().getTime();
+	const encryptedPassword = md5(password);
+	const encryptedNamePasswordTimestamp = md5(
+		username + encryptedPassword + timestamp
+	);
+	const userInfo =
+		'login?username=' +
+		username +
+		'&timestamp=' +
+		timestamp +
+		'&token=' +
+		encryptedNamePasswordTimestamp;
+
+	// console log part
+	console.log('** start of printing statement **');
+	console.log('timestamp' + timestamp);
+	console.log(username);
+	console.log(password);
+	console.log(encryptedPassword);
+	console.log(encryptedNamePasswordTimestamp);
+	console.log('username=' + username + 'andsomethingelse');
+	console.log(
+		'http://10.0.104.86:8081/login?username=test&timestamp=1597906515&token=6152494536e76d61491ad651d912cdd6'
+	);
+	console.log(baseUrl + userInfo);
+	//e10adc3949ba59abbe56e057f20f883e
+	//e10adc3949ba59abbe56e057f20f883e
+
+	return fetch(baseUrl + userInfo, {
+		method: 'GET',
+	})
+		.then(
+			(response) => {
+				if (response.ok) {
+					return response;
+				} else {
+					var error = new Error(
+						'Error ' + response.status + ': ' + response.statusText
+					);
+					error.response = response;
+					throw error;
+				}
+			},
+			(error) => {
+				throw error;
+			}
+		)
+		.then((response) => response.json())
+		.then((response) => {
+			if (response.data) {
+				// If login was successful, set the token in local storage
+				localStorage.setItem('token', response.data);
+				localStorage.setItem('creds', JSON.stringify(creds));
+				// Dispatch the success action
+				dispatch(receiveLogin(response));
+			} else {
+				var error = new Error('Error ' + response.status);
+				error.response = response;
+				throw error;
+			}
 		})
 		.catch((error) => dispatch(loginError(error.message)));
 };
@@ -56,19 +119,15 @@ export const receiveLogout = () => {
 // Logs the user out
 export const logoutUser = () => (dispatch) => {
 	dispatch(requestLogout());
-	auth
-		.signOut()
-		.then(() => {
-			// Sign-out successful.
-		})
-		.catch((error) => {
-			// An error happened.
-		});
-	localStorage.removeItem('user');
+	localStorage.removeItem('token');
+	localStorage.removeItem('creds');
 	dispatch(favoritesFailed('Error 401: Unauthorized'));
 	dispatch(receiveLogout());
 };
 
+/*
+--------------------------------------------------------------------------
+*/
 //---------- end of LOGIN / LOGOUT part --------------
 
 export const addComment = (comment) => ({
