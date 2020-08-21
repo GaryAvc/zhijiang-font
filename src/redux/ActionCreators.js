@@ -6,6 +6,7 @@ import { auth, firestore, fireauth, firebasestore } from '../firebase/firebase';
 */
 
 import md5 from 'md5';
+import { baseUrl } from '../shared/baseUrl';
 
 export const requestLogin = (creds) => {
 	return {
@@ -52,21 +53,6 @@ export const loginUser = (creds) => (dispatch) => {
 		timestamp +
 		'&token=' +
 		encryptedNamePasswordTimestamp;
-
-	// console log part
-	console.log('** start of printing statement **');
-	console.log('timestamp' + timestamp);
-	console.log(username);
-	console.log(password);
-	console.log(encryptedPassword);
-	console.log(encryptedNamePasswordTimestamp);
-	console.log('username=' + username + 'andsomethingelse');
-	console.log(
-		'http://10.0.104.86:8081/login?username=test&timestamp=1597906515&token=6152494536e76d61491ad651d912cdd6'
-	);
-	console.log(baseUrl + userInfo);
-	//e10adc3949ba59abbe56e057f20f883e
-	//e10adc3949ba59abbe56e057f20f883e
 
 	return fetch(baseUrl + userInfo, {
 		method: 'GET',
