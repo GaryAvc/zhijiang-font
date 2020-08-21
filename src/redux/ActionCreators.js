@@ -1,10 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import { auth, firestore, fireauth, firebasestore } from '../firebase/firebase';
 
-/*
-	todo: change the firebase server to ip address server
-*/
-
 import md5 from 'md5';
 import { baseUrl } from '../shared/baseUrl';
 
@@ -112,9 +108,100 @@ export const logoutUser = () => (dispatch) => {
 };
 
 /*
---------------------------------------------------------------------------
+---------- end of LOGIN / LOGOUT part --------------
 */
-//---------- end of LOGIN / LOGOUT part --------------
+
+export const fetchDishes = () => (dispatch) => {
+	dispatch(dishesLoading(true));
+
+	return fetch(baseUrl + 'dishes')
+		.then(
+			(response) => {
+				if (response.ok) {
+					return response;
+				} else {
+					var error = new Error(
+						'Error ' + response.status + ': ' + response.statusText
+					);
+					error.response = response;
+					throw error;
+				}
+			},
+			(error) => {
+				var errmess = new Error(error.message);
+				throw errmess;
+			}
+		)
+		.then((response) => response.json())
+		.then((dishes) => dispatch(addDishes(dishes)))
+		.catch((error) => dispatch(dishesFailed(error.message)));
+};
+
+export const dishesLoading = () => ({
+	type: ActionTypes.DISHES_LOADING,
+});
+
+export const dishesFailed = (errmess) => ({
+	type: ActionTypes.DISHES_FAILED,
+	payload: errmess,
+});
+
+export const addDishes = (dishes) => ({
+	type: ActionTypes.ADD_DISHES,
+	payload: dishes,
+});
+
+// ---- end of dish(problem/题目) part ----
+
+export const fetchRecords = () => (dispatch) => {
+	dispatch(dishesLoading(true));
+
+	return firestore
+		.collection('records')
+		.get()
+		.then((snapshot) => {
+			let records = [];
+			snapshot.forEach((doc) => {
+				const data = doc.data();
+				const _id = doc.id;
+				records.push({ _id, ...data });
+			});
+			return records;
+		})
+		.then((records) => dispatch(addRecords(records)))
+		.catch((error) => dispatch(dishesFailed(error.message)));
+};
+
+export const fetchRanks = () => (dispatch) => {
+	return firestore
+		.collection('ranks')
+		.get()
+		.then((snapshot) => {
+			let ranks = [];
+			snapshot.forEach((doc) => {
+				const data = doc.data();
+				const _id = doc.id;
+				ranks.push({ _id, ...data });
+			});
+			return ranks;
+		})
+		.then((ranks) => dispatch(addRanks(ranks)))
+		.catch((error) => dispatch(dishesFailed(error.message)));
+};
+
+export const addRecords = (records) => ({
+	type: ActionTypes.ADD_RECORDS,
+	payload: records,
+});
+
+export const addRanks = (ranks) => ({
+	type: ActionTypes.ADD_RANKS,
+	payload: ranks,
+});
+
+/*
+------------------- end of zj useful part -------------------
+*/
 
 export const addComment = (comment) => ({
 	type: ActionTypes.ADD_COMMENT,
@@ -164,85 +251,6 @@ export const postComment = (dishId, rating, comment) => (dispatch) => {
 			alert('Your comment could not be posted\nError: ' + error.message);
 		});
 };
-
-export const fetchDishes = () => (dispatch) => {
-	dispatch(dishesLoading(true));
-
-	return firestore
-		.collection('dishes')
-		.get()
-		.then((snapshot) => {
-			let dishes = [];
-			snapshot.forEach((doc) => {
-				const data = doc.data();
-				const _id = doc.id;
-				dishes.push({ _id, ...data });
-			});
-			return dishes;
-		})
-		.then((dishes) => dispatch(addDishes(dishes)))
-		.catch((error) => dispatch(dishesFailed(error.message)));
-};
-
-export const fetchRecords = () => (dispatch) => {
-	dispatch(dishesLoading(true));
-
-	return firestore
-		.collection('records')
-		.get()
-		.then((snapshot) => {
-			let records = [];
-			snapshot.forEach((doc) => {
-				const data = doc.data();
-				const _id = doc.id;
-				records.push({ _id, ...data });
-			});
-			return records;
-		})
-		.then((records) => dispatch(addRecords(records)))
-		.catch((error) => dispatch(dishesFailed(error.message)));
-};
-
-export const fetchRanks = () => (dispatch) => {
-	return firestore
-		.collection('ranks')
-		.get()
-		.then((snapshot) => {
-			let ranks = [];
-			snapshot.forEach((doc) => {
-				const data = doc.data();
-				const _id = doc.id;
-				ranks.push({ _id, ...data });
-			});
-			return ranks;
-		})
-		.then((ranks) => dispatch(addRanks(ranks)))
-		.catch((error) => dispatch(dishesFailed(error.message)));
-};
-
-export const dishesLoading = () => ({
-	type: ActionTypes.DISHES_LOADING,
-});
-
-export const dishesFailed = (errmess) => ({
-	type: ActionTypes.DISHES_FAILED,
-	payload: errmess,
-});
-
-export const addDishes = (dishes) => ({
-	type: ActionTypes.ADD_DISHES,
-	payload: dishes,
-});
-
-export const addRecords = (records) => ({
-	type: ActionTypes.ADD_RECORDS,
-	payload: records,
-});
-
-export const addRanks = (ranks) => ({
-	type: ActionTypes.ADD_RANKS,
-	payload: ranks,
-});
 
 export const fetchComments = () => (dispatch) => {
 	return firestore
