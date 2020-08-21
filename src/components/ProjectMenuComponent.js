@@ -48,6 +48,26 @@ function RenderMenuItem({ dish }) {
 }
 
 const ProjectMenu = (props) => {
+	const menuA = props.dishes.dishes.map((dish) => {
+		if (dish.examType == 'A') {
+			return (
+				<div key={dish._id} className="col-12 col-md-12 m-2">
+					<RenderMenuItem dish={dish} />
+				</div>
+			);
+		}
+	});
+
+	const menuB = props.dishes.dishes.map((dish) => {
+		if (dish.examType == 'B') {
+			return (
+				<div key={dish._id} className="col-12 col-md-12 m-2">
+					<RenderMenuItem dish={dish} />
+				</div>
+			);
+		}
+	});
+
 	const menu = props.dishes.dishes.map((dish) => {
 		return (
 			<div key={dish._id} className="col-12 col-md-12 m-2">
@@ -95,12 +115,12 @@ const ProjectMenu = (props) => {
 					<h3>A卷</h3>
 					<hr />
 				</div>
-				<div className="row">{menu}</div>
+				<div className="row">{menuA}</div>
 				<div className="col-12">
 					<h3>B卷</h3>
 					<hr />
 				</div>
-				<div className="row">{menu}</div>
+				<div className="row">{menuB}</div>
 				<div className="col-12">
 					<h3>决赛</h3>
 					<hr />
