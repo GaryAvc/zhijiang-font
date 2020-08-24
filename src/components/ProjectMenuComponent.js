@@ -30,7 +30,7 @@ function RenderMenuItem({ dish }) {
 				>
 					下载题目
 				</Button>
-				<Link to={`/menu/${dish._id}`}>
+				<Link to={`/menu/${dish.caseId}`}>
 					<Button
 						color="primary"
 						size="md"

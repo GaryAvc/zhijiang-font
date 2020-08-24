@@ -119,11 +119,12 @@ class Main extends Component {
 		};
 
 		const DishWithId = ({ match }) => {
+			console.log('HERE IS THE MATCH.PARAMS.DISHID :' + match.params.dishId);
 			return this.props.auth.isAuthenticated ? (
 				<DishDetail
 					dish={
 						this.props.dishes.dishes.filter(
-							(dish) => dish._id === match.params.dishId
+							(dish) => dish.caseId === match.params.dishId
 						)[0]
 					}
 					records={this.props.records}
@@ -134,7 +135,7 @@ class Main extends Component {
 				<DishDetail
 					dish={
 						this.props.dishes.dishes.filter(
-							(dish) => dish._id === match.params.dishId
+							(dish) => dish.caseId === match.params.dishId
 						)[0]
 					}
 					records={this.props.records}

@@ -168,7 +168,7 @@ export const addFinalTests = (finalTests) => ({
 // ---- end of finalTests part ----
 
 // ---- start of records part ----
-export const fetchRecords = () => (dispatch) => {
+export const fetchRecords = (questionId) => (dispatch) => {
 	dispatch(recordsLoading(true));
 
 	// test if can access the user info from localstorage
@@ -176,20 +176,21 @@ export const fetchRecords = () => (dispatch) => {
 	if (localStorage.getItem('creds') != null) {
 		console.log('username :' + localStorage.getItem('username'));
 	}
-	return firestore
-		.collection('records')
-		.get()
-		.then((snapshot) => {
-			let records = [];
-			snapshot.forEach((doc) => {
-				const data = doc.data();
-				const _id = doc.id;
-				records.push({ _id, ...data });
-			});
-			return records;
-		})
-		.then((records) => dispatch(addRecords(records)))
-		.catch((error) => dispatch(dishesFailed(error.message)));
+
+	dispatch(dishesLoading(true));
+
+	//demo6_2_drivereverse/AITownReconstructed_V0103_200518/drivereverse_002
+
+	return fetch(
+		baseUrl +
+			'listCommitRecords?caseId=' +
+			'demo4_obstacle/AITownReconstructed_V0103_200518/other' +
+			'&username=' +
+			localStorage.getItem('username')
+	)
+		.then((response) => response.json())
+		.then((records) => dispatch(addRecords(records.data)))
+		.catch((error) => dispatch(recordsFailed(error.message)));
 };
 
 export const recordsLoading = () => ({

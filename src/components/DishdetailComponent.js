@@ -7,23 +7,13 @@ import { Loading } from './LoadingComponent';
 //todo - modify the dispatch in this Component instead of Main
 
 function RenderDish({ record }) {
-	const timestamp = record.time;
-
-	var formattedTimestamp = Intl.DateTimeFormat('en-US', {
-		year: 'numeric',
-		month: 'short',
-		day: '2-digit',
-		hour: 'numeric',
-		minute: '2-digit',
-		second: '2-digit',
-	}).format(timestamp);
 	// Outputs the date and time in Mon dd, YYYY, H:MM:SS AM/PM format
 	return (
 		<tr>
-			<th scope="row">{record.id}</th>
-			<td>{record.name}</td>
+			<th scope="row">{record.submitTime}</th>
 			<td>{record.score}</td>
-			<td>{formattedTimestamp}</td>
+			<td>{record.duration}</td>
+			<td>{record.stopReason}</td>
 		</tr>
 	);
 }
@@ -68,9 +58,10 @@ const DishDetail = (props) => {
 					<Table>
 						<thead>
 							<th>#</th>
-							<th>名称</th>
-							<th>得分</th>
-							<th>时间</th>
+							<th>提交时间</th>
+							<th>最终得分</th>
+							<th>持续时间</th>
+							<th>停止原因</th>
 						</thead>
 						<tbody>{singleRecord}</tbody>
 					</Table>
