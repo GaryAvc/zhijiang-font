@@ -3,6 +3,8 @@ import { Breadcrumb, BreadcrumbItem, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 
+// todo - modify to fetch info from ip server
+
 function RenderDish({ record }) {
 	const timestamp = record.time;
 
