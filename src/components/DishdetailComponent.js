@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 
 // todo - modify to fetch info from ip server
+//todo - modify the dispatch in this Component instead of Main
 
 function RenderDish({ record }) {
 	const timestamp = record.time;
