@@ -10,7 +10,7 @@ function RenderDish({ record }) {
 	// Outputs the date and time in Mon dd, YYYY, H:MM:SS AM/PM format
 	return (
 		<tr>
-			<th scope="row">{record.submitTime}</th>
+			<th scope="row">{record.createTime}</th>
 			<td>{record.score}</td>
 			<td>{record.duration}</td>
 			<td>{record.stopReason}</td>
@@ -57,7 +57,6 @@ const DishDetail = (props) => {
 				<div className="row">
 					<Table>
 						<thead>
-							<th>#</th>
 							<th>提交时间</th>
 							<th>最终得分</th>
 							<th>持续时间</th>
