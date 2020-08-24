@@ -73,8 +73,12 @@ export const loginUser = (creds) => (dispatch) => {
 		.then((response) => {
 			if (response.data) {
 				// If login was successful, set the token in local storage
+				console.log(
+					'here is the username when it is recorded:' + creds.username
+				);
 				localStorage.setItem('token', response.data);
 				localStorage.setItem('creds', JSON.stringify(creds));
+				localStorage.setItem('username', creds.username);
 				// Dispatch the success action
 				dispatch(receiveLogin(response));
 			} else {
@@ -166,6 +170,11 @@ export const addFinalTests = (finalTests) => ({
 export const fetchRecords = () => (dispatch) => {
 	dispatch(dishesLoading(true));
 
+	// test if can access the user info from localstorage
+	console.log('Here is going to print username if it can from localStorage');
+	if (localStorage.getItem('creds') != null) {
+		console.log('username :' + localStorage.getItem('username'));
+	}
 	return firestore
 		.collection('records')
 		.get()
