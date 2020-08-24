@@ -163,24 +163,31 @@ export const addFinalTests = (finalTests) => ({
 
 // ---- end of finalTests part ----
 
+// ---- start of records part ----
 export const fetchRecords = () => (dispatch) => {
-	dispatch(dishesLoading(true));
+	dispatch(recordsLoading(true));
 
-	return firestore
-		.collection('records')
-		.get()
-		.then((snapshot) => {
-			let records = [];
-			snapshot.forEach((doc) => {
-				const data = doc.data();
-				const _id = doc.id;
-				records.push({ _id, ...data });
-			});
-			return records;
-		})
-		.then((records) => dispatch(addRecords(records)))
+	return fetch(baseUrl + preTestUrl)
+		.then((response) => response.json())
+		.then((dishes) => dispatch(addDishes(dishes.data)))
 		.catch((error) => dispatch(dishesFailed(error.message)));
 };
+
+export const recordsLoading = () => ({
+	type: ActionTypes.RECORDS_LOADING,
+});
+
+export const recordsFailed = (errmess) => ({
+	type: ActionTypes.RECORDS_FAILED,
+	payload: errmess,
+});
+
+export const addRecords = (records) => ({
+	type: ActionTypes.ADD_RECORDS,
+	payload: records,
+});
+
+// ---- end of records part ----
 
 export const fetchRanks = () => (dispatch) => {
 	return firestore
@@ -198,11 +205,6 @@ export const fetchRanks = () => (dispatch) => {
 		.then((ranks) => dispatch(addRanks(ranks)))
 		.catch((error) => dispatch(dishesFailed(error.message)));
 };
-
-export const addRecords = (records) => ({
-	type: ActionTypes.ADD_RECORDS,
-	payload: records,
-});
 
 export const addRanks = (ranks) => ({
 	type: ActionTypes.ADD_RANKS,
