@@ -26,7 +26,7 @@ export const loginError = (message) => {
 };
 
 // todo: use md5 to change the username and password to encrypted token
-
+//
 export const loginUser = (creds) => (dispatch) => {
 	// We dispatch requestLogin to kickoff the call to the API
 	dispatch(requestLogin(creds));
