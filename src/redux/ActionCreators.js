@@ -73,8 +73,12 @@ export const loginUser = (creds) => (dispatch) => {
 		.then((response) => {
 			if (response.data) {
 				// If login was successful, set the token in local storage
+				console.log(
+					'here is the username when it is recorded:' + creds.username
+				);
 				localStorage.setItem('token', response.data);
 				localStorage.setItem('creds', JSON.stringify(creds));
+				localStorage.setItem('username', creds.username);
 				// Dispatch the success action
 				dispatch(receiveLogin(response));
 			} else {
@@ -167,9 +171,24 @@ export const addFinalTests = (finalTests) => ({
 export const fetchRecords = () => (dispatch) => {
 	dispatch(recordsLoading(true));
 
-	return fetch(baseUrl + preTestUrl)
-		.then((response) => response.json())
-		.then((dishes) => dispatch(addDishes(dishes.data)))
+	// test if can access the user info from localstorage
+	console.log('Here is going to print username if it can from localStorage');
+	if (localStorage.getItem('creds') != null) {
+		console.log('username :' + localStorage.getItem('username'));
+	}
+	return firestore
+		.collection('records')
+		.get()
+		.then((snapshot) => {
+			let records = [];
+			snapshot.forEach((doc) => {
+				const data = doc.data();
+				const _id = doc.id;
+				records.push({ _id, ...data });
+			});
+			return records;
+		})
+		.then((records) => dispatch(addRecords(records)))
 		.catch((error) => dispatch(dishesFailed(error.message)));
 };
 
