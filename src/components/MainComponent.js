@@ -119,13 +119,16 @@ class Main extends Component {
 		};
 
 		const DishWithId = ({ match }) => {
-			console.log('HERE IS THE MATCH.PARAMS.DISHID :' + match.params.dishId);
+			const caseId =
+				match.params.dishId1 +
+				'/' +
+				match.params.dishId2 +
+				'/' +
+				match.params.dishId3;
 			return this.props.auth.isAuthenticated ? (
 				<DishDetail
 					dish={
-						this.props.dishes.dishes.filter(
-							(dish) => dish.caseId === match.params.dishId
-						)[0]
+						this.props.dishes.dishes.filter((dish) => dish.caseId === caseId)[0]
 					}
 					records={this.props.records}
 					isLoading={this.props.dishes.isLoading}
@@ -183,7 +186,10 @@ class Main extends Component {
 								path="/aboutus"
 								component={() => <ProjectAbout leaders={this.props.leaders} />}
 							/>
-							<Route path="/menu/:dishId" component={DishWithId} />
+							<Route
+								path="/menu/:dishId1/:dishId2/:dishId3"
+								component={DishWithId}
+							/>
 
 							<PrivateRoute
 								exact
