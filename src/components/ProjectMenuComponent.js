@@ -67,10 +67,10 @@ const ProjectMenu = (props) => {
 		}
 	});
 
-	const menu = props.dishes.dishes.map((dish) => {
+	const finalShow = props.finalTests.finalTests.map((finalTest) => {
 		return (
-			<div key={dish._id} className="col-12 col-md-12 m-2">
-				<RenderMenuItem dish={dish} />
+			<div key={finalTest._id} className="col-12 col-md-12 m-2">
+				<RenderMenuItem dish={finalTest} />
 			</div>
 		);
 	});
@@ -124,7 +124,7 @@ const ProjectMenu = (props) => {
 					<h3>决赛</h3>
 					<hr />
 				</div>
-				<div className="row">{menu}</div>
+				<div className="row">{finalShow}</div>
 			</div>
 		);
 };

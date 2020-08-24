@@ -20,6 +20,7 @@ import {
 	deleteFavorite,
 	fetchRecords,
 	fetchRanks,
+	fetchFinalTests,
 } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -40,6 +41,7 @@ const mapStateToProps = (state) => {
 		auth: state.auth,
 		records: state.records,
 		ranks: state.ranks,
+		finalTests: state.finalTests,
 	};
 };
 
@@ -49,6 +51,9 @@ const mapDispatchToProps = (dispatch) => ({
 	},
 	fetchRanks: () => {
 		dispatch(fetchRanks());
+	},
+	fetchFinalTests: () => {
+		dispatch(fetchFinalTests());
 	},
 	postComment: (dishId, rating, comment) =>
 		dispatch(postComment(dishId, rating, comment)),
@@ -77,6 +82,7 @@ const mapDispatchToProps = (dispatch) => ({
 class Main extends Component {
 	componentDidMount() {
 		this.props.fetchDishes();
+		this.props.fetchFinalTests();
 		this.props.fetchRecords();
 		this.props.fetchRanks();
 		this.props.fetchComments();
@@ -181,7 +187,12 @@ class Main extends Component {
 							<PrivateRoute
 								exact
 								path="/menu"
-								component={() => <ProjectMenu dishes={this.props.dishes} />}
+								component={() => (
+									<ProjectMenu
+										dishes={this.props.dishes}
+										finalTests={this.props.finalTests}
+									/>
+								)}
 							/>
 
 							{/* todo: delete later */}
