@@ -114,8 +114,6 @@ export const logoutUser = () => (dispatch) => {
 export const fetchDishes = () => (dispatch) => {
 	dispatch(dishesLoading(true));
 
-	//http://10.0.104.86:8081/listCases?phaseType=1
-
 	return fetch(baseUrl + preTestUrl)
 		.then((response) => response.json())
 		.then((dishes) => dispatch(addDishes(dishes.data)))
@@ -137,6 +135,33 @@ export const addDishes = (dishes) => ({
 });
 
 // ---- end of dish(problem/题目) part ----
+
+// ---- start of finalTests part ----
+
+export const fetchFinalTests = () => (dispatch) => {
+	dispatch(finalTestsLoading(true));
+
+	return fetch(baseUrl + finalTestUrl)
+		.then((response) => response.json())
+		.then((finalTests) => dispatch(addFinalTests(finalTests.data)))
+		.catch((error) => dispatch(finalTestsFailed(error.message)));
+};
+
+export const finalTestsLoading = () => ({
+	type: ActionTypes.FINALTESTS_LOADING,
+});
+
+export const finalTestsFailed = (errmess) => ({
+	type: ActionTypes.FINALTESTS_FAILED,
+	payload: errmess,
+});
+
+export const addFinalTests = (finalTests) => ({
+	type: ActionTypes.ADD_FINALTESTS,
+	payload: finalTests,
+});
+
+// ---- end of finalTests part ----
 
 export const fetchRecords = () => (dispatch) => {
 	dispatch(dishesLoading(true));
