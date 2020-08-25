@@ -177,7 +177,7 @@ class Main extends Component {
 					logoutUser={this.props.logoutUser}
 					googleLogin={this.props.googleLogin}
 				/>
-				<TransitionGroup>
+				<TransitionGroup className="bodyGroup">
 					<CSSTransition
 						key={this.props.location.key}
 						classNames="page"
@@ -232,7 +232,7 @@ class Main extends Component {
 						</Switch>
 					</CSSTransition>
 				</TransitionGroup>
-				<Footer />
+				<Footer className="footer" />
 			</div>
 		);
 	}

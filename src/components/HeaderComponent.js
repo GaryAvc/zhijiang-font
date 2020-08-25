@@ -130,7 +130,7 @@ class Header extends Component {
 				</Navbar>
 
 				{/* added info */}
-				<div id="home" className="landing">
+				{/* <div id="home" className="landing">
 					<div className="home-wrap">
 						<div className="home-inner"></div>
 					</div>
@@ -150,7 +150,7 @@ class Header extends Component {
 					<p>
 						积极探索一条从人才强、科技强到产业强、经济强、国家强的发展新路径，浙江省政府决定成立之江实验室。
 					</p>
-				</div>
+				</div> */}
 				{/* added info */}
 				<Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
 					<ModalHeader toggle={this.toggleModal}>登录你的帐号</ModalHeader>

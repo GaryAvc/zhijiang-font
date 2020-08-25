@@ -47,7 +47,7 @@ const DishDetail = (props) => {
 						<BreadcrumbItem>
 							<Link to="/menu">题目</Link>
 						</BreadcrumbItem>
-						<BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+						<BreadcrumbItem active>{props.dish.caseId}</BreadcrumbItem>
 					</Breadcrumb>
 					<div className="col-12">
 						<h3>{props.dish.name}</h3>

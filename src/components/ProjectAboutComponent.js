@@ -75,12 +75,12 @@ function ProjectAbout(props) {
 				</div>
 			</div>
 
-			<div className="row row-content">
+			{/* <div className="row row-content">
 				<div className="col-12">
 					<h2>科研人员</h2>
 				</div>
 				<LeaderList leaders={props.leaders} />
-			</div>
+			</div> */}
 
 			<div className="row row-content">
 				<div className="col-12 col-md-6">
