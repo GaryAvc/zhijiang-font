@@ -127,6 +127,8 @@ class Main extends Component {
 				match.params.dishId2 +
 				'/' +
 				match.params.dishId3;
+			//  todo - when here the records didn't get fetch, so the isLoading is still
+			// 		is true, so that cause the problem
 			return this.props.auth.isAuthenticated ? (
 				<DishDetail
 					dish={
