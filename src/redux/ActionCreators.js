@@ -177,7 +177,7 @@ export const fetchRecords = (questionId) => (dispatch) => {
 		console.log('username :' + localStorage.getItem('username'));
 	}
 
-	dispatch(dishesLoading(true));
+	dispatch(recordsLoading(true));
 
 	//demo6_2_drivereverse/AITownReconstructed_V0103_200518/drivereverse_002
 
