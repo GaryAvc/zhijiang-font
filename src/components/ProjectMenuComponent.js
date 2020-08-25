@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 
 // todo: start to match to server interface
+// todo - change fetchRecords to onClick in Menu
 function RenderMenuItem({ dish }) {
 	return (
 		<Card>

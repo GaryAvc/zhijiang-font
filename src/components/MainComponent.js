@@ -45,6 +45,7 @@ const mapStateToProps = (state) => {
 	};
 };
 
+// todo - change fetchRecords to onClick in Menu
 const mapDispatchToProps = (dispatch) => ({
 	fetchRecords: () => {
 		dispatch(fetchRecords());
@@ -80,6 +81,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class Main extends Component {
+	// todo - change fetchRecords to onClick in Menu
 	componentDidMount() {
 		this.props.fetchDishes();
 		this.props.fetchFinalTests();
@@ -190,7 +192,7 @@ class Main extends Component {
 								path="/menu/:dishId1/:dishId2/:dishId3"
 								component={DishWithId}
 							/>
-
+							// todo - change fetchRecords to onClick in Menu
 							<PrivateRoute
 								exact
 								path="/menu"
@@ -201,14 +203,12 @@ class Main extends Component {
 									/>
 								)}
 							/>
-
 							{/* todo: delete later */}
 							{/* <Route
 								exact
 								path="/menu"
 								component={() => <ProjectMenu dishes={this.props.dishes} />}
 							/> */}
-
 							<PrivateRoute
 								exact
 								path="/favorites"
@@ -220,7 +220,6 @@ class Main extends Component {
 									/>
 								)}
 							/>
-
 							<Route
 								exact
 								path="/contactus"
