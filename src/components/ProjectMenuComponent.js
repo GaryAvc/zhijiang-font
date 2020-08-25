@@ -13,7 +13,11 @@ import { Loading } from './LoadingComponent';
 
 // todo: start to match to server interface
 // todo - change fetchRecords to onClick in Menu
-function RenderMenuItem({ dish }) {
+function RenderMenuItem({ dish, fetchRecords }) {
+	function handleClick() {
+		fetchRecords(dish.caseId);
+	}
+
 	return (
 		<Card>
 			<CardBody>
@@ -33,6 +37,7 @@ function RenderMenuItem({ dish }) {
 				</Button>
 				<Link to={`/menu/${dish.caseId}`}>
 					<Button
+						onClick={handleClick}
 						color="primary"
 						size="md"
 						className="col-md-5 m-2"
@@ -52,7 +57,7 @@ const ProjectMenu = (props) => {
 		if (dish.examType == 'A') {
 			return (
 				<div key={dish._id} className="col-12 col-md-12 m-2">
-					<RenderMenuItem dish={dish} />
+					<RenderMenuItem dish={dish} fetchRecords={props.fetchRecords} />
 				</div>
 			);
 		}
@@ -62,7 +67,7 @@ const ProjectMenu = (props) => {
 		if (dish.examType == 'B') {
 			return (
 				<div key={dish._id} className="col-12 col-md-12 m-2">
-					<RenderMenuItem dish={dish} />
+					<RenderMenuItem dish={dish} fetchRecords={props.fetchRecords} />
 				</div>
 			);
 		}
@@ -71,7 +76,7 @@ const ProjectMenu = (props) => {
 	const finalShow = props.finalTests.finalTests.map((finalTest) => {
 		return (
 			<div key={finalTest._id} className="col-12 col-md-12 m-2">
-				<RenderMenuItem dish={finalTest} />
+				<RenderMenuItem dish={finalTest} fetchRecords={props.fetchRecords} />
 			</div>
 		);
 	});

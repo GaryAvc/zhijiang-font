@@ -47,8 +47,8 @@ const mapStateToProps = (state) => {
 
 // todo - change fetchRecords to onClick in Menu
 const mapDispatchToProps = (dispatch) => ({
-	fetchRecords: () => {
-		dispatch(fetchRecords());
+	fetchRecords: (questionId) => {
+		dispatch(fetchRecords(questionId));
 	},
 	fetchRanks: () => {
 		dispatch(fetchRanks());
@@ -85,7 +85,7 @@ class Main extends Component {
 	componentDidMount() {
 		this.props.fetchDishes();
 		this.props.fetchFinalTests();
-		this.props.fetchRecords();
+		// this.props.fetchRecords();
 		this.props.fetchRanks();
 		this.props.fetchComments();
 		this.props.fetchPromos();
@@ -200,6 +200,7 @@ class Main extends Component {
 									<ProjectMenu
 										dishes={this.props.dishes}
 										finalTests={this.props.finalTests}
+										fetchRecords={this.props.fetchRecords}
 									/>
 								)}
 							/>
