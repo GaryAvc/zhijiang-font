@@ -179,12 +179,10 @@ export const fetchRecords = (questionId) => (dispatch) => {
 
 	dispatch(recordsLoading(true));
 
-	//demo6_2_drivereverse/AITownReconstructed_V0103_200518/drivereverse_002
-
 	return fetch(
 		baseUrl +
 			'listCommitRecords?caseId=' +
-			'demo4_obstacle/AITownReconstructed_V0103_200518/other' +
+			questionId +
 			'&username=' +
 			localStorage.getItem('username')
 	)
