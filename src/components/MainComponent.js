@@ -6,18 +6,9 @@ import Footer from './FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
-	postComment,
-	postFeedback,
 	fetchDishes,
-	fetchComments,
-	fetchPromos,
-	fetchLeaders,
 	loginUser,
 	logoutUser,
-	fetchFavorites,
-	googleLogin,
-	postFavorite,
-	deleteFavorite,
 	fetchRecords,
 	fetchRanks,
 	fetchFinalTests,
@@ -33,10 +24,7 @@ import { Card, CardTitle, CardBody, CardImg } from 'reactstrap';
 const mapStateToProps = (state) => {
 	return {
 		dishes: state.dishes,
-		comments: state.comments,
-		promotions: state.promotions,
-		leaders: state.leaders,
-		favorites: state.favorites,
+
 		auth: state.auth,
 		records: state.records,
 		ranks: state.ranks,
@@ -55,28 +43,11 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchFinalTests: () => {
 		dispatch(fetchFinalTests());
 	},
-	postComment: (dishId, rating, comment) =>
-		dispatch(postComment(dishId, rating, comment)),
 	fetchDishes: () => {
 		dispatch(fetchDishes());
 	},
-	resetFeedbackForm: () => {
-		dispatch(actions.reset('feedback'));
-	},
-	fetchComments: () => {
-		dispatch(fetchComments());
-	},
-	fetchPromos: () => {
-		dispatch(fetchPromos());
-	},
-	fetchLeaders: () => dispatch(fetchLeaders()),
-	postFeedback: (feedback) => dispatch(postFeedback(feedback)),
 	loginUser: (creds) => dispatch(loginUser(creds)),
 	logoutUser: () => dispatch(logoutUser()),
-	fetchFavorites: () => dispatch(fetchFavorites()),
-	googleLogin: () => dispatch(googleLogin()),
-	postFavorite: (dishId) => dispatch(postFavorite(dishId)),
-	deleteFavorite: (dishId) => dispatch(deleteFavorite(dishId)),
 });
 
 class Main extends Component {
@@ -86,10 +57,6 @@ class Main extends Component {
 		this.props.fetchFinalTests();
 		// this.props.fetchRecords();
 		this.props.fetchRanks();
-		this.props.fetchComments();
-		this.props.fetchPromos();
-		this.props.fetchLeaders();
-		this.props.fetchFavorites();
 	}
 
 	componentWillUnmount() {
@@ -103,18 +70,6 @@ class Main extends Component {
 					dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]}
 					dishesLoading={this.props.dishes.isLoading}
 					dishesErrMess={this.props.dishes.errMess}
-					promotion={
-						this.props.promotions.promotions.filter(
-							(promo) => promo.featured
-						)[0]
-					}
-					promosLoading={this.props.promotions.isLoading}
-					promosErrMess={this.props.promotions.errMess}
-					leader={
-						this.props.leaders.leaders.filter((leader) => leader.featured)[0]
-					}
-					leaderLoading={this.props.leaders.isLoading}
-					leaderErrMess={this.props.leaders.errMess}
 				/>
 			);
 		};
