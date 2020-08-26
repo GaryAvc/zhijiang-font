@@ -2,6 +2,8 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+// todo - Start to modify the code to updated to ip server
+
 function RenderRank({ rank }) {
 	// Outputs the date and time in Mon dd, YYYY, H:MM:SS AM/PM format
 	return (
