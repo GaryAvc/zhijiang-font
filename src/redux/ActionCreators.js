@@ -2,7 +2,7 @@ import * as ActionTypes from './ActionTypes';
 import { auth, firestore, fireauth, firebasestore } from '../firebase/firebase';
 
 import md5 from 'md5';
-import { baseUrl, preTestUrl, finalTestUrl } from '../shared/baseUrl';
+import { baseUrl, preTestUrl, finalTestUrl, rankUrl } from '../shared/baseUrl';
 
 export const requestLogin = (creds) => {
 	return {
@@ -171,14 +171,6 @@ export const addFinalTests = (finalTests) => ({
 export const fetchRecords = (questionId) => (dispatch) => {
 	dispatch(recordsLoading(true));
 
-	// test if can access the user info from localstorage
-	console.log('Here is going to print username if it can from localStorage');
-	if (localStorage.getItem('creds') != null) {
-		console.log('username :' + localStorage.getItem('username'));
-	}
-
-	dispatch(recordsLoading(true));
-
 	return fetch(
 		baseUrl +
 			'listCommitRecords?caseId=' +
@@ -207,27 +199,33 @@ export const addRecords = (records) => ({
 
 // ---- end of records part ----
 
+// ---- start of rank part ----
+// [{"caseScore":[{"caseId":"milestone2_demo/AITownReconstructed_V0103_200518/apollo_add_basic/case.json","caseScore":100.0}],
+//   "rank":1,"totalScore":100.0,"username":"test"}]
 export const fetchRanks = () => (dispatch) => {
-	return firestore
-		.collection('ranks')
-		.get()
-		.then((snapshot) => {
-			let ranks = [];
-			snapshot.forEach((doc) => {
-				const data = doc.data();
-				const _id = doc.id;
-				ranks.push({ _id, ...data });
-			});
-			return ranks;
-		})
-		.then((ranks) => dispatch(addRanks(ranks)))
-		.catch((error) => dispatch(dishesFailed(error.message)));
+	dispatch(ranksLoading(true));
+
+	return fetch(baseUrl + rankUrl)
+		.then((response) => response.json())
+		.then((ranks) => dispatch(addRanks(ranks.data)))
+		.catch((error) => dispatch(ranksFailed(error.message)));
 };
 
 export const addRanks = (ranks) => ({
 	type: ActionTypes.ADD_RANKS,
 	payload: ranks,
 });
+
+export const ranksFailed = (errmess) => ({
+	type: ActionTypes.RANKS_FAILED,
+	payload: errmess,
+});
+
+export const ranksLoading = () => ({
+	type: ActionTypes.RANKS_LOADING,
+});
+
+// ---- end of rank part ----
 
 /*
 ------------------- end of zj useful part -------------------
