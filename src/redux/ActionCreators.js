@@ -200,14 +200,13 @@ export const addRecords = (records) => ({
 // ---- end of records part ----
 
 // ---- start of rank part ----
-// [{"caseScore":[{"caseId":"milestone2_demo/AITownReconstructed_V0103_200518/apollo_add_basic/case.json","caseScore":100.0}],
-//   "rank":1,"totalScore":100.0,"username":"test"}]
+
 export const fetchRanks = () => (dispatch) => {
 	dispatch(ranksLoading(true));
 
 	return fetch(baseUrl + rankUrl)
 		.then((response) => response.json())
-		.then((ranks) => dispatch(addRanks(ranks.data)))
+		.then((ranks) => dispatch(addRanks(ranks)))
 		.catch((error) => dispatch(ranksFailed(error.message)));
 };
 
