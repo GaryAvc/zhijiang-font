@@ -40,7 +40,7 @@ function ProjectHome(props) {
 						}}
 					>
 						<Card>
-							<Link to={'/menu'}>
+							<Link to={'/problems'}>
 								<CardImg src={'assets/images/arrange.gif'} alt={'register'} />
 								<CardBody>
 									<CardTitle>{'查看题目'}</CardTitle>
@@ -59,7 +59,7 @@ function ProjectHome(props) {
 						}}
 					>
 						<Card>
-							<Link to={'/contactus'}>
+							<Link to={'/rank'}>
 								<CardImg
 									src={'assets/images/professor.gif'}
 									alt={'professor'}

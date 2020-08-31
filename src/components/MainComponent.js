@@ -131,6 +131,8 @@ class Main extends Component {
 					logoutUser={this.props.logoutUser}
 					googleLogin={this.props.googleLogin}
 				/>
+
+				{/* todo - change the url to correct zj url */}
 				<TransitionGroup className="bodyGroup">
 					<CSSTransition
 						key={this.props.location.key}
@@ -145,13 +147,13 @@ class Main extends Component {
 								component={() => <ProjectAbout leaders={this.props.leaders} />}
 							/>
 							<Route
-								path="/menu/:dishId1/:dishId2/:dishId3"
+								path="/problems/:dishId1/:dishId2/:dishId3"
 								component={DishWithId}
 							/>
 							// todo - change fetchRecords to onClick in Menu
 							<PrivateRoute
 								exact
-								path="/menu"
+								path="/problems"
 								component={() => (
 									<ProjectMenu
 										dishes={this.props.dishes}
@@ -179,7 +181,7 @@ class Main extends Component {
 							/>
 							<Route
 								exact
-								path="/contactus"
+								path="/rank"
 								component={() => <Ranking ranks={this.props.ranks} />}
 							/>
 							<Redirect to="/home" />
