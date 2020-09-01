@@ -10,7 +10,9 @@ function RenderDownloads({ download }) {
 			<th scope="row">{download.name}</th>
 			<td>{download.createTime}</td>
 			<td>{download.updateTime}</td>
-			<td>{download.url}</td>
+			<Link to={download.url} target="_blank">
+				<td>{download.url}</td>
+			</Link>
 		</tr>
 	);
 }

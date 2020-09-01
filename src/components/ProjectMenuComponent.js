@@ -26,15 +26,6 @@ function RenderMenuItem({ dish, fetchRecords }) {
 				<CardText>标签 : {dish.caseLabels}</CardText>
 				<CardText>类型 : {dish.examType}</CardText>
 
-				<Button
-					color="primary"
-					size="md"
-					className=" col-md-5 m-2"
-					href="/assets/images/bird.jpg"
-					download
-				>
-					下载题目
-				</Button>
 				<Link to={`/menu/${dish.caseId}`}>
 					<Button
 						onClick={handleClick}
