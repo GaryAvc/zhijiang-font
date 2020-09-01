@@ -79,11 +79,11 @@ function ProjectHome(props) {
 						}}
 					>
 						<Card>
-							<Link to={'/aboutus'}>
+							<Link to={'/download'}>
 								<CardImg src={'assets/images/register.gif'} alt={'arrange'} />
 								<CardBody>
-									<CardTitle>{'关于我们'}</CardTitle>
-									<CardText>{'查看关于之江实验室的更多信息'}</CardText>
+									<CardTitle>{'下载页面'}</CardTitle>
+									<CardText>{'下载相关题目'}</CardText>
 								</CardBody>
 							</Link>
 						</Card>

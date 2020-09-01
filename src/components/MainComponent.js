@@ -147,7 +147,7 @@ class Main extends Component {
 							<Route path="/home" component={HomePage} />
 							<Route
 								exact
-								path="/aboutus"
+								path="/download"
 								component={() => (
 									<ProjectAbout downloads={this.props.downloads} />
 								)}

@@ -95,8 +95,8 @@ class Header extends Component {
 									</NavLink>
 								</NavItem>
 								<NavItem>
-									<NavLink className="nav-link" to="/aboutus">
-										<span className="fa fa-info fa-lg"></span> 关于我们
+									<NavLink className="nav-link" to="/download">
+										<span className="fa fa-info fa-lg"></span> 下载页面
 									</NavLink>
 								</NavItem>
 							</Nav>
