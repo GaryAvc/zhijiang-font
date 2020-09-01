@@ -3,13 +3,13 @@ import { Breadcrumb, BreadcrumbItem, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 // todo - Start to modify the code to updated to ip server
-// {"createTime":"20200818","name":"软件","updateTime":"20200919","url":"https://www.sojson.com"}
+//{"name": "软件","url": "https://www.sojson.com","publishTime": "20200818","info": "更新什么东西"}
 function RenderDownloads({ download }) {
 	return (
 		<tr>
 			<th scope="row">{download.name}</th>
-			<td>{download.createTime}</td>
-			<td>{download.updateTime}</td>
+			<td>{download.publishTime}</td>
+			<td>{download.info}</td>
 			<Link to={download.url} target="_blank">
 				<td>{download.url}</td>
 			</Link>
@@ -40,8 +40,8 @@ const Downloading = (props) => {
 				<Table>
 					<thead>
 						<th>名称</th>
-						<th>创建时间</th>
-						<th>更新时间</th>
+						<th>发布时间</th>
+						<th>更新内容</th>
 						<th>下载地址</th>
 					</thead>
 					<tbody>{singleDownload}</tbody>
