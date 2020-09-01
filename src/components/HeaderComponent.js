@@ -6,7 +6,6 @@ import {
 	NavbarToggler,
 	Collapse,
 	NavItem,
-	Jumbotron,
 	Button,
 	Modal,
 	ModalHeader,
