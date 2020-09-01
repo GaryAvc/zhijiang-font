@@ -225,6 +225,32 @@ export const ranksLoading = () => ({
 
 // ---- end of rank part ----
 
+// ---- start of download part ----
+
+export const fetchDownloads = () => (dispatch) => {
+	dispatch(downloadsLoading(true));
+
+	return fetch(baseUrl + rankUrl)
+		.then((response) => response.json())
+		.then((downloads) => dispatch(addDownloads(downloads)))
+		.catch((error) => dispatch(downloadsFailed(error.message)));
+};
+
+export const addDownloads = (downloads) => ({
+	type: ActionTypes.ADD_DOWNLOADS,
+	payload: downloads,
+});
+
+export const downloadsFailed = (errmess) => ({
+	type: ActionTypes.DOWNLOADS_FAILED,
+	payload: errmess,
+});
+
+export const downloadsLoading = () => ({
+	type: ActionTypes.DOWNLOADS_LOADING,
+});
+
+// ---- end of download part ----
 /*
 ------------------- end of zj useful part -------------------
 */

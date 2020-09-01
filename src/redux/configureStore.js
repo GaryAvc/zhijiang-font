@@ -11,6 +11,7 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { InitialFeedback } from './forms';
 import { Ranks } from './ranks';
+import { Downloads } from './downloads';
 
 export const ConfigureStore = () => {
 	const store = createStore(
@@ -23,6 +24,7 @@ export const ConfigureStore = () => {
 			records: Records,
 			ranks: Ranks,
 			finalTests: FinalTests,
+			downloads: Downloads,
 			...createForms({
 				feedback: InitialFeedback,
 			}),
