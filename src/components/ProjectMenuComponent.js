@@ -26,7 +26,7 @@ function RenderMenuItem({ dish, fetchRecords }) {
 				<CardText>标签 : {dish.caseLabels}</CardText>
 				<CardText>类型 : {dish.examType}</CardText>
 
-				<Link to={`/menu/${dish.caseId}`}>
+				<Link to={`/problems/${dish.caseId}`}>
 					<Button
 						onClick={handleClick}
 						color="primary"
