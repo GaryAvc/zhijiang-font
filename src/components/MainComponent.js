@@ -12,19 +12,19 @@ import {
 	fetchRecords,
 	fetchRanks,
 	fetchFinalTests,
+	fetchDownloads,
 } from '../redux/ActionCreators';
-import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import ProjectHome from './ProjectHomeComponent';
 import ProjectMenu from './ProjectMenuComponent';
 import ProjectAbout from './ProjectAboutComponent';
 import Ranking from './RankingComponent';
-import { Card, CardTitle, CardBody, CardImg } from 'reactstrap';
+import { Card, CardTitle, CardBody } from 'reactstrap';
 
 const mapStateToProps = (state) => {
 	return {
 		dishes: state.dishes,
-
+		downloads: state.downloads,
 		auth: state.auth,
 		records: state.records,
 		ranks: state.ranks,
@@ -43,6 +43,9 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchFinalTests: () => {
 		dispatch(fetchFinalTests());
 	},
+	fetchDownloads: () => {
+		dispatch(fetchDownloads());
+	},
 	fetchDishes: () => {
 		dispatch(fetchDishes());
 	},
@@ -57,6 +60,7 @@ class Main extends Component {
 		this.props.fetchFinalTests();
 		// this.props.fetchRecords();
 		this.props.fetchRanks();
+		this.props.fetchDownloads();
 	}
 
 	componentWillUnmount() {
@@ -144,7 +148,9 @@ class Main extends Component {
 							<Route
 								exact
 								path="/aboutus"
-								component={() => <ProjectAbout leaders={this.props.leaders} />}
+								component={() => (
+									<ProjectAbout downloads={this.props.downloads} />
+								)}
 							/>
 							<Route
 								path="/problems/:dishId1/:dishId2/:dishId3"

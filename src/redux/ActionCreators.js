@@ -1,7 +1,13 @@
 import * as ActionTypes from './ActionTypes';
 
 import md5 from 'md5';
-import { baseUrl, preTestUrl, finalTestUrl, rankUrl } from '../shared/baseUrl';
+import {
+	baseUrl,
+	preTestUrl,
+	finalTestUrl,
+	rankUrl,
+	downloadUrl,
+} from '../shared/baseUrl';
 
 export const requestLogin = (creds) => {
 	return {
@@ -230,9 +236,9 @@ export const ranksLoading = () => ({
 export const fetchDownloads = () => (dispatch) => {
 	dispatch(downloadsLoading(true));
 
-	return fetch(baseUrl + rankUrl)
+	return fetch(baseUrl + downloadUrl)
 		.then((response) => response.json())
-		.then((downloads) => dispatch(addDownloads(downloads)))
+		.then((downloads) => dispatch(addDownloads(downloads.data)))
 		.catch((error) => dispatch(downloadsFailed(error.message)));
 };
 
