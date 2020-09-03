@@ -45,7 +45,7 @@ function RenderMenuItem({ dish, fetchRecords }) {
 
 const ProjectMenu = (props) => {
 	const menuA = props.dishes.dishes.map((dish) => {
-		if (dish.examType === 'A') {
+		if (dish.paperType === 'A') {
 			return (
 				<div key={dish._id} className="col-12 col-md-12 m-2">
 					<RenderMenuItem dish={dish} fetchRecords={props.fetchRecords} />
@@ -55,7 +55,7 @@ const ProjectMenu = (props) => {
 	});
 
 	const menuB = props.dishes.dishes.map((dish) => {
-		if (dish.examType == 'B') {
+		if (dish.paperType == 'B') {
 			return (
 				<div key={dish._id} className="col-12 col-md-12 m-2">
 					<RenderMenuItem dish={dish} fetchRecords={props.fetchRecords} />

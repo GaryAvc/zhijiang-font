@@ -1,4 +1,5 @@
 import * as ActionTypes from './ActionTypes';
+import { useAlert } from 'react-alert';
 
 import md5 from 'md5';
 import {
@@ -8,6 +9,8 @@ import {
 	rankUrl,
 	downloadUrl,
 } from '../shared/baseUrl';
+
+// const alert = useAlert();
 
 export const requestLogin = (creds) => {
 	return {
@@ -92,7 +95,10 @@ export const loginUser = (creds) => (dispatch) => {
 				throw error;
 			}
 		})
-		.catch((error) => dispatch(loginError(error.message)));
+		.catch((error) => {
+			dispatch(loginError(error.message));
+			// alert.show(error.message);
+		});
 };
 
 export const requestLogout = () => {
