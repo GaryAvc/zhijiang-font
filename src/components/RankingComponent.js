@@ -56,12 +56,7 @@ const Ranking = (props) => {
 						<th>用户</th>
 						<th>排名</th>
 						<th>总得分</th>
-						<th>题1</th>
-						<th>题2</th>
-						<th>题3</th>
-						<th>题4</th>
-						<th>题5</th>
-						<th>题6</th>
+						<th>各小题得分</th>
 					</thead>
 					<tbody>{singleRank}</tbody>
 				</Table>

@@ -107,21 +107,21 @@ const ProjectMenu = (props) => {
 					<h3>初赛</h3>
 					<hr />
 				</div>
-				<div className="col-12">
+				<div className="col-12 ml-3">
 					<h3>A卷</h3>
 					<hr />
 				</div>
-				<div className="row">{menuA}</div>
-				<div className="col-12">
+				<div className="row  ml-3">{menuA}</div>
+				<div className="col-12 ml-3">
 					<h3>B卷</h3>
 					<hr />
 				</div>
-				<div className="row">{menuB}</div>
+				<div className="row  ml-3">{menuB}</div>
 				<div className="col-12">
 					<h3>决赛</h3>
 					<hr />
 				</div>
-				<div className="row">{finalShow}</div>
+				<div className="row  ml-3">{finalShow}</div>
 			</div>
 		);
 };

@@ -11,8 +11,14 @@ function RenderDish({ record }) {
 	return (
 		<tr>
 			<th scope="row">{record.createTime}</th>
-			<td>{record.score}</td>
-			<td>{record.duration}</td>
+			<td>{record.totalScore}</td>
+			<td>{record.efficiencyScore}</td>
+			<td>{record.safetyScore}</td>
+			<td>{record.stabilityScore}</td>
+			<td>{record.fitnessScore}</td>
+			<td>{record.predictabilityScore}</td>
+			<td>{record.economyScore}</td>
+			<td>{record.simElapsedTime}</td>
 			<td>{record.stopReason}</td>
 		</tr>
 	);
@@ -39,13 +45,14 @@ const DishDetail = (props) => {
 				</div>
 			</div>
 		);
-	} else if (props.dish != null)
+	} else if (props.dish != null) {
+		window.scrollTo(0, 0);
 		return (
 			<div className="container">
 				<div className="row">
 					<Breadcrumb>
 						<BreadcrumbItem>
-							<Link to="/menu">题目</Link>
+							<Link to="/problems">题目</Link>
 						</BreadcrumbItem>
 						<BreadcrumbItem active>{props.dish.caseId}</BreadcrumbItem>
 					</Breadcrumb>
@@ -54,11 +61,18 @@ const DishDetail = (props) => {
 						<hr />
 					</div>
 				</div>
+
 				<div className="row">
 					<Table>
 						<thead>
 							<th>提交时间</th>
 							<th>最终得分</th>
+							<th>效率性得分</th>
+							<th>安全性得分</th>
+							<th>稳定性得分</th>
+							<th>舒适性得分</th>
+							<th>预见性得分</th>
+							<th>经济性得分</th>
 							<th>持续时间</th>
 							<th>停止原因</th>
 						</thead>
@@ -67,7 +81,7 @@ const DishDetail = (props) => {
 				</div>
 			</div>
 		);
-	else return <div></div>;
+	} else return <div></div>;
 };
 
 export default DishDetail;
