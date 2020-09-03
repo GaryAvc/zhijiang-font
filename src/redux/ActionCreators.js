@@ -92,6 +92,8 @@ export const loginUser = (creds) => (dispatch) => {
 			} else {
 				var error = new Error('Error ' + response.status);
 				error.response = response;
+				alert(response.msg);
+				console.log('here is the error' + response.msg);
 				throw error;
 			}
 		})
