@@ -61,6 +61,7 @@ class Main extends Component {
 		// this.props.fetchRecords();
 		this.props.fetchRanks();
 		this.props.fetchDownloads();
+		// document.title = '无人车驾驶仿真赛';
 	}
 
 	componentWillUnmount() {
