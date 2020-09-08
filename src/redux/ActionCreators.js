@@ -63,7 +63,7 @@ export const loginUser = (creds) => (dispatch) => {
 	})
 		.then(
 			(response) => {
-				if (response.ok) {
+				if (!response.result) {
 					return response;
 				} else {
 					var error = new Error(
