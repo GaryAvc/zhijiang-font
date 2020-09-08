@@ -70,13 +70,7 @@ class Main extends Component {
 
 	render() {
 		const HomePage = () => {
-			return (
-				<ProjectHome
-					dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]}
-					dishesLoading={this.props.dishes.isLoading}
-					dishesErrMess={this.props.dishes.errMess}
-				/>
-			);
+			return <ProjectHome />;
 		};
 
 		const DishWithId = ({ match }) => {

@@ -22,9 +22,8 @@ function RenderMenuItem({ dish, fetchRecords }) {
 		<Card>
 			<CardBody>
 				<CardTitle>{dish.caseId}</CardTitle>
-				<CardText>简介 : {dish.description}</CardText>
+				<CardText>简介 : {dish.caseDescription}</CardText>
 				<CardText>标签 : {dish.caseLabels}</CardText>
-				<CardText>类型 : {dish.examType}</CardText>
 
 				<Link to={`/problems/${dish.caseId}`}>
 					<Button

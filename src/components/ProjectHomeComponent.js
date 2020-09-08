@@ -3,31 +3,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import { FadeTransform } from 'react-animation-components';
 import { Link } from 'react-router-dom';
 
-// function RenderCard({ item, isLoading, errMess }) {
-// 	if (isLoading) {
-// 		return <Loading />;
-// 	} else if (errMess) {
-// 		return <h4>{errMess}</h4>;
-// 	} else
-// 		return (
-// 			<FadeTransform
-// 				in
-// 				transformProps={{
-// 					exitTransform: 'scale(0.5) translateY(-50%)',
-// 				}}
-// 			>
-// 				<Card>
-// 					<CardImg src={item.image} alt={item.name} />
-// 					<CardBody>
-// 						<CardTitle>{item.name}</CardTitle>
-// 						<CardText>{item.description}</CardText>
-// 					</CardBody>
-// 				</Card>
-// 			</FadeTransform>
-// 		);
-// }
-
-function ProjectHome(props) {
+function ProjectHome() {
 	return (
 		<div className="container">
 			<div className="row align-items-start">
