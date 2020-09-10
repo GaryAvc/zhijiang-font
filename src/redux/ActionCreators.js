@@ -63,7 +63,8 @@ export const loginUser = (creds) => (dispatch) => {
 	})
 		.then(
 			(response) => {
-				if (response.result) {
+				if (response.ok) {
+					// console.log("Here is the resonse's result" + response.json().data);
 					return response;
 				} else {
 					var error = new Error(
@@ -134,7 +135,8 @@ export const fetchDishes = () => (dispatch) => {
 	return fetch(baseUrl + preTestUrl)
 		.then(
 			(response) => {
-				if (response.result) {
+				if (response.ok) {
+					console.log('Here is the response info :' + response);
 					return response;
 				} else {
 					var error = new Error(
@@ -149,7 +151,13 @@ export const fetchDishes = () => (dispatch) => {
 			}
 		)
 		.then((response) => response.json())
-		.then((dishes) => dispatch(addDishes(dishes.data)))
+		.then((dishes) => {
+			console.log('Here is the dishes info :' + dishes);
+			console.log('Here is the dishes info :' + dishes.result);
+			// console.log('Here is the response info :' + response);
+			dispatch(addDishes(dishes.data));
+		})
+
 		.catch((error) => dispatch(dishesFailed(error.message)));
 };
 
