@@ -63,7 +63,7 @@ export const loginUser = (creds) => (dispatch) => {
 	})
 		.then(
 			(response) => {
-				if (!response.result) {
+				if (response.result) {
 					return response;
 				} else {
 					var error = new Error(
@@ -132,6 +132,22 @@ export const fetchDishes = () => (dispatch) => {
 	dispatch(dishesLoading(true));
 
 	return fetch(baseUrl + preTestUrl)
+		.then(
+			(response) => {
+				if (response.result) {
+					return response;
+				} else {
+					var error = new Error(
+						'Error ' + response.status + ': ' + response.statusText
+					);
+					error.response = response;
+					throw error;
+				}
+			},
+			(error) => {
+				throw error;
+			}
+		)
 		.then((response) => response.json())
 		.then((dishes) => dispatch(addDishes(dishes.data)))
 		.catch((error) => dispatch(dishesFailed(error.message)));
