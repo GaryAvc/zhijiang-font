@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Breadcrumb, BreadcrumbItem, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
+import { fetchRecords } from '../redux/ActionCreators';
 
 // todo - modify to fetch info from ip server
 //todo - modify the dispatch in this Component instead of Main
@@ -23,7 +24,19 @@ function RenderDish({ record }) {
 		</tr>
 	);
 }
-
+const mapDispatchToProps = (dispatch) => {
+	return {
+		// dispatching plain actions
+		fetchRecords: (questionId) => {
+			dispatch(fetchRecords(questionId));
+		},
+	};
+};
+const mapStateToProps = (state) => {
+	return {
+		records: state.records,
+	};
+};
 class DishDetail extends Component {
 	componentDidMount() {
 		console.log('dishdetail component is mounted');
