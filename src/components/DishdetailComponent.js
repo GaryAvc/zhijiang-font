@@ -10,7 +10,7 @@ function RenderDish({ record }) {
 	// Outputs the date and time in Mon dd, YYYY, H:MM:SS AM/PM format
 	return (
 		<tr>
-			<th scope="row">{record.createTime}</th>
+			<th scope="row">{record.startTime}</th>
 			<td>{record.totalScore}</td>
 			<td>{record.efficiencyScore}</td>
 			<td>{record.safetyScore}</td>
@@ -73,7 +73,7 @@ const DishDetail = (props) => {
 							<th>舒适性得分</th>
 							<th>预见性得分</th>
 							<th>经济性得分</th>
-							<th>持续时间</th>
+							<th>持续时间(秒)</th>
 							<th>停止原因</th>
 						</thead>
 						<tbody>{singleRecord}</tbody>
