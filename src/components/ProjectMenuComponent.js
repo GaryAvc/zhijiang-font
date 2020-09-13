@@ -14,9 +14,9 @@ import { Loading } from './LoadingComponent';
 // todo: start to match to server interface
 // todo - change fetchRecords to onClick in Menu
 function RenderMenuItem({ dish, fetchRecords }) {
-	function handleClick() {
-		fetchRecords(dish.caseId);
-	}
+	// function handleClick() {
+	// 	fetchRecords(dish.caseId);
+	// }
 
 	return (
 		<Card>
@@ -27,7 +27,7 @@ function RenderMenuItem({ dish, fetchRecords }) {
 
 				<Link to={`/problems/${dish.caseId}`}>
 					<Button
-						onClick={handleClick}
+						// onClick={handleClick}
 						color="primary"
 						size="md"
 						className="col-md-5 m-2"
