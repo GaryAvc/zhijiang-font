@@ -52,9 +52,7 @@ class DishDetail extends Component {
 			);
 		}
 		if (this.props.dish != null) {
-			this.props.fetchRecords(
-				'testA/AITownReconstructed_V0103_200518/test004redux-logger.js:1'
-			);
+			this.props.fetchRecords(this.props.dish.caseId);
 		}
 	}
 

@@ -26,7 +26,7 @@ const mapStateToProps = (state) => {
 		dishes: state.dishes,
 		downloads: state.downloads,
 		auth: state.auth,
-		records: state.records,
+		// records: state.records,
 		ranks: state.ranks,
 		finalTests: state.finalTests,
 	};
@@ -34,9 +34,9 @@ const mapStateToProps = (state) => {
 
 // todo - change fetchRecords to onClick in Menu
 const mapDispatchToProps = (dispatch) => ({
-	fetchRecords: (questionId) => {
-		dispatch(fetchRecords(questionId));
-	},
+	// fetchRecords: (questionId) => {
+	// 	dispatch(fetchRecords(questionId));
+	// },
 	fetchRanks: () => {
 		dispatch(fetchRanks());
 	},
@@ -84,9 +84,9 @@ class Main extends Component {
 			// 		is true, so that cause the problem
 			return (
 				<DishDetail
-					// dish={
-					// 	this.props.dishes.dishes.filter((dish) => dish.caseId === caseId)[0]
-					// }
+					dish={
+						this.props.dishes.dishes.filter((dish) => dish.caseId === caseId)[0]
+					}
 					// records={this.props.records}
 					isLoading={this.props.dishes.isLoading}
 					errMess={this.props.dishes.errMess}
@@ -148,7 +148,7 @@ class Main extends Component {
 									<ProjectMenu
 										dishes={this.props.dishes}
 										finalTests={this.props.finalTests}
-										fetchRecords={this.props.fetchRecords}
+										// fetchRecords={this.props.fetchRecords}
 									/>
 								)}
 							/>
