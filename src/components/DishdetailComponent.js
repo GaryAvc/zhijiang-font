@@ -8,7 +8,10 @@ import { fetchRecords } from '../redux/ActionCreators';
 //todo - modify the dispatch in this Component instead of Main
 
 function RenderDish({ record }) {
-	// Outputs the date and time in Mon dd, YYYY, H:MM:SS AM/PM format
+	// console.log(
+	// 	'To see if you can still get single record info when refresh: ' + record
+	// );
+
 	return (
 		<tr>
 			<th scope="row">{record.startTime}</th>
@@ -64,6 +67,10 @@ class DishDetail extends Component {
 				</div>
 			);
 		} else if (this.props.dish != null) {
+			console.log(
+				'To see if you can still get dish info when refresh: ' +
+					this.props.dish.caseId
+			);
 			window.scrollTo(0, 0);
 			return (
 				<div className="container">
