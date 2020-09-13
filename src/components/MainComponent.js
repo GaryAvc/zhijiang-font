@@ -84,10 +84,10 @@ class Main extends Component {
 			// 		is true, so that cause the problem
 			return (
 				<DishDetail
-					dish={
-						this.props.dishes.dishes.filter((dish) => dish.caseId === caseId)[0]
-					}
-					records={this.props.records}
+					// dish={
+					// 	this.props.dishes.dishes.filter((dish) => dish.caseId === caseId)[0]
+					// }
+					// records={this.props.records}
 					isLoading={this.props.dishes.isLoading}
 					errMess={this.props.dishes.errMess}
 				/>

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 import { fetchRecords } from '../redux/ActionCreators';
 
+import { connect } from 'react-redux';
+
 // todo - modify to fetch info from ip server
 //todo - modify the dispatch in this Component instead of Main
 
@@ -42,7 +44,18 @@ const mapStateToProps = (state) => {
 };
 class DishDetail extends Component {
 	componentDidMount() {
-		console.log('dishdetail component is mounted');
+		// console.log('dishdetail component is mounted');
+		if (this.props.dish != null) {
+			console.log(
+				'To see if you can still get dish info when refresh in componentDidMount: ' +
+					this.props.dish.caseId
+			);
+		}
+		if (this.props.dish != null) {
+			this.props.fetchRecords(
+				'testA/AITownReconstructed_V0103_200518/test004redux-logger.js:1'
+			);
+		}
 	}
 
 	render() {
@@ -67,10 +80,10 @@ class DishDetail extends Component {
 				</div>
 			);
 		} else if (this.props.dish != null) {
-			console.log(
-				'To see if you can still get dish info when refresh: ' +
-					this.props.dish.caseId
-			);
+			// console.log(
+			// 	'To see if you can still get dish info when refresh: ' +
+			// 		this.props.dish.caseId
+			// );
 			window.scrollTo(0, 0);
 			return (
 				<div className="container">
@@ -110,4 +123,5 @@ class DishDetail extends Component {
 	}
 }
 
-export default DishDetail;
+// export default DishDetail;
+export default connect(mapStateToProps, mapDispatchToProps)(DishDetail);
