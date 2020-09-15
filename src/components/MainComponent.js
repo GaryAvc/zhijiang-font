@@ -136,7 +136,8 @@ class Main extends Component {
 									<ProjectAbout downloads={this.props.downloads} />
 								)}
 							/>
-							<Route
+							<PrivateRoute
+								exact
 								path="/problems/:dishId1/:dishId2/:dishId3"
 								component={DishWithId}
 							/>
@@ -158,17 +159,6 @@ class Main extends Component {
 								path="/menu"
 								component={() => <ProjectMenu dishes={this.props.dishes} />}
 							/> */}
-							<PrivateRoute
-								exact
-								path="/favorites"
-								component={() => (
-									<Favorites
-										favorites={this.props.favorites}
-										dishes={this.props.dishes}
-										deleteFavorite={this.props.deleteFavorite}
-									/>
-								)}
-							/>
 							<Route
 								exact
 								path="/rank"
