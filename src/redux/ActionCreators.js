@@ -121,6 +121,7 @@ export const logoutUser = () => (dispatch) => {
 	dispatch(requestLogout());
 	localStorage.removeItem('token');
 	localStorage.removeItem('creds');
+	localStorage.removeItem('username');
 
 	dispatch(receiveLogout());
 };
