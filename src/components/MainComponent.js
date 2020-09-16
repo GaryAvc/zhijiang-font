@@ -165,6 +165,7 @@ class Main extends Component {
 								component={() => <Ranking ranks={this.props.ranks} />}
 							/>
 							<Redirect to="/home" />
+							{/* up to date */}
 						</Switch>
 					</CSSTransition>
 				</TransitionGroup>
