@@ -29,7 +29,7 @@ address {
 }
 
 .navbar-dark {
-	background-color: #1970d4;
+	background-color: gray;
 }
 
 .page-enter {
@@ -95,4 +95,9 @@ address {
 
 .motto {
 	margin: 30px;
+}
+
+.bodyGroup {
+	margin-top: 200px;
+	margin-bottom: 350px;
 }

@@ -4,27 +4,33 @@ import { Dishes } from './dishes';
 import { Comments } from './comments';
 import { Promotions } from './promotions';
 import { Leaders } from './leaders';
-import { favorites } from './favorites';
+import { FinalTests } from './finalTests';
 import { Auth } from './auth';
+import { Records } from './records';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { InitialFeedback } from './forms';
+import { Ranks } from './ranks';
+import { Downloads } from './downloads';
 
 export const ConfigureStore = () => {
-    const store = createStore(
-        combineReducers({
-            dishes: Dishes,
-            comments: Comments,
-            promotions: Promotions,
-            leaders: Leaders,
-            auth: Auth,
-            favorites,
-            ...createForms({
-                feedback: InitialFeedback
-            })
-        }),
-        applyMiddleware(thunk, logger)
-    );
+	const store = createStore(
+		combineReducers({
+			dishes: Dishes,
+			comments: Comments,
+			promotions: Promotions,
+			leaders: Leaders,
+			auth: Auth,
+			records: Records,
+			ranks: Ranks,
+			finalTests: FinalTests,
+			downloads: Downloads,
+			...createForms({
+				feedback: InitialFeedback,
+			}),
+		}),
+		applyMiddleware(thunk, logger)
+	);
 
-    return store;
-}
+	return store;
+};

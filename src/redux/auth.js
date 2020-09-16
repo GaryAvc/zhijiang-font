@@ -6,22 +6,30 @@ import * as ActionTypes from './ActionTypes';
 export const Auth = (
 	state = {
 		isLoading: false,
-		isAuthenticated: false,
-		user: null,
+		isAuthenticated: localStorage.getItem('token') ? true : false,
+		token: localStorage.getItem('token'),
+		user: localStorage.getItem('creds')
+			? JSON.parse(localStorage.getItem('creds'))
+			: null,
 		errMess: null,
 	},
 	action
 ) => {
 	switch (action.type) {
 		case ActionTypes.LOGIN_REQUEST:
-			return { ...state, isLoading: true, isAuthenticated: false };
+			return {
+				...state,
+				isLoading: true,
+				isAuthenticated: false,
+				user: action.creds,
+			};
 		case ActionTypes.LOGIN_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
 				isAuthenticated: true,
 				errMess: '',
-				user: action.user,
+				token: action.token,
 			};
 		case ActionTypes.LOGIN_FAILURE:
 			return {

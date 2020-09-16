@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Menu from './MenuComponent';
-import Contact from './ContactComponent';
 import DishDetail from './DishdetailComponent';
 import Favorites from './FavoriteComponent';
 import Header from './HeaderComponent';
@@ -8,69 +6,62 @@ import Footer from './FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
-	postComment,
-	postFeedback,
 	fetchDishes,
-	fetchComments,
-	fetchPromos,
-	fetchLeaders,
 	loginUser,
 	logoutUser,
-	fetchFavorites,
-	googleLogin,
-	postFavorite,
-	deleteFavorite,
+	fetchRecords,
+	fetchRanks,
+	fetchFinalTests,
+	fetchDownloads,
 } from '../redux/ActionCreators';
-import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-
 import ProjectHome from './ProjectHomeComponent';
 import ProjectMenu from './ProjectMenuComponent';
 import ProjectAbout from './ProjectAboutComponent';
+import Ranking from './RankingComponent';
+import { Card, CardTitle, CardBody } from 'reactstrap';
 
 const mapStateToProps = (state) => {
 	return {
 		dishes: state.dishes,
-		comments: state.comments,
-		promotions: state.promotions,
-		leaders: state.leaders,
-		favorites: state.favorites,
+		downloads: state.downloads,
 		auth: state.auth,
+		// records: state.records,
+		ranks: state.ranks,
+		finalTests: state.finalTests,
 	};
 };
 
+// todo - change fetchRecords to onClick in Menu
 const mapDispatchToProps = (dispatch) => ({
-	postComment: (dishId, rating, comment) =>
-		dispatch(postComment(dishId, rating, comment)),
+	// fetchRecords: (questionId) => {
+	// 	dispatch(fetchRecords(questionId));
+	// },
+	fetchRanks: () => {
+		dispatch(fetchRanks());
+	},
+	fetchFinalTests: () => {
+		dispatch(fetchFinalTests());
+	},
+	fetchDownloads: () => {
+		dispatch(fetchDownloads());
+	},
 	fetchDishes: () => {
 		dispatch(fetchDishes());
 	},
-	resetFeedbackForm: () => {
-		dispatch(actions.reset('feedback'));
-	},
-	fetchComments: () => {
-		dispatch(fetchComments());
-	},
-	fetchPromos: () => {
-		dispatch(fetchPromos());
-	},
-	fetchLeaders: () => dispatch(fetchLeaders()),
-	postFeedback: (feedback) => dispatch(postFeedback(feedback)),
 	loginUser: (creds) => dispatch(loginUser(creds)),
 	logoutUser: () => dispatch(logoutUser()),
-	fetchFavorites: () => dispatch(fetchFavorites()),
-	googleLogin: () => dispatch(googleLogin()),
-	postFavorite: (dishId) => dispatch(postFavorite(dishId)),
-	deleteFavorite: (dishId) => dispatch(deleteFavorite(dishId)),
 });
 
 class Main extends Component {
+	// todo - change fetchRecords to onClick in Menu
 	componentDidMount() {
 		this.props.fetchDishes();
-		this.props.fetchComments();
-		this.props.fetchPromos();
-		this.props.fetchLeaders();
-		this.props.fetchFavorites();
+		this.props.fetchFinalTests();
+		// this.props.fetchRecords();
+		this.props.fetchRanks();
+		this.props.fetchDownloads();
+		// document.title = '无人车驾驶仿真赛';
 	}
 
 	componentWillUnmount() {
@@ -79,64 +70,26 @@ class Main extends Component {
 
 	render() {
 		const HomePage = () => {
-			return (
-				<ProjectHome
-					dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]}
-					dishesLoading={this.props.dishes.isLoading}
-					dishesErrMess={this.props.dishes.errMess}
-					promotion={
-						this.props.promotions.promotions.filter(
-							(promo) => promo.featured
-						)[0]
-					}
-					promosLoading={this.props.promotions.isLoading}
-					promosErrMess={this.props.promotions.errMess}
-					leader={
-						this.props.leaders.leaders.filter((leader) => leader.featured)[0]
-					}
-					leaderLoading={this.props.leaders.isLoading}
-					leaderErrMess={this.props.leaders.errMess}
-				/>
-			);
+			return <ProjectHome />;
 		};
 
 		const DishWithId = ({ match }) => {
-			return this.props.auth.isAuthenticated &&
-				this.props.favorites.favorites ? (
+			const caseId =
+				match.params.dishId1 +
+				'/' +
+				match.params.dishId2 +
+				'/' +
+				match.params.dishId3;
+			//  todo - when here the records didn't get fetch, so the isLoading is still
+			// 		is true, so that cause the problem
+			return (
 				<DishDetail
 					dish={
-						this.props.dishes.dishes.filter(
-							(dish) => dish._id === match.params.dishId
-						)[0]
+						this.props.dishes.dishes.filter((dish) => dish.caseId === caseId)[0]
 					}
+					// records={this.props.records}
 					isLoading={this.props.dishes.isLoading}
 					errMess={this.props.dishes.errMess}
-					comments={this.props.comments.comments.filter(
-						(comment) => comment.dish === match.params.dishId
-					)}
-					commentsErrMess={this.props.comments.errMess}
-					postComment={this.props.postComment}
-					favorite={this.props.favorites.favorites.dishes.some(
-						(dish) => dish === match.params.dishId
-					)}
-					postFavorite={this.props.postFavorite}
-				/>
-			) : (
-				<DishDetail
-					dish={
-						this.props.dishes.dishes.filter(
-							(dish) => dish._id === match.params.dishId
-						)[0]
-					}
-					isLoading={this.props.dishes.isLoading}
-					errMess={this.props.dishes.errMess}
-					comments={this.props.comments.comments.filter(
-						(comment) => comment.dish === match.params.dishId
-					)}
-					commentsErrMess={this.props.comments.errMess}
-					postComment={this.props.postComment}
-					favorite={false}
-					postFavorite={this.props.postFavorite}
 				/>
 			);
 		};
@@ -148,12 +101,11 @@ class Main extends Component {
 					this.props.auth.isAuthenticated ? (
 						<Component {...props} />
 					) : (
-						<Redirect
-							to={{
-								pathname: '/home',
-								state: { from: props.location },
-							}}
-						/>
+						<Card>
+							<CardBody>
+								<CardTitle>请先登录，以此查看更多信息。</CardTitle>
+							</CardBody>
+						</Card>
 					)
 				}
 			/>
@@ -167,7 +119,9 @@ class Main extends Component {
 					logoutUser={this.props.logoutUser}
 					googleLogin={this.props.googleLogin}
 				/>
-				<TransitionGroup>
+
+				{/* todo - change the url to correct zj url */}
+				<TransitionGroup className="bodyGroup">
 					<CSSTransition
 						key={this.props.location.key}
 						classNames="page"
@@ -177,42 +131,44 @@ class Main extends Component {
 							<Route path="/home" component={HomePage} />
 							<Route
 								exact
-								path="/aboutus"
-								component={() => <ProjectAbout leaders={this.props.leaders} />}
+								path="/download"
+								component={() => (
+									<ProjectAbout downloads={this.props.downloads} />
+								)}
 							/>
-							} />
-							<Route
+							<PrivateRoute
+								exact
+								path="/problems/:dishId1/:dishId2/:dishId3"
+								component={DishWithId}
+							/>
+							// todo - change fetchRecords to onClick in Menu
+							<PrivateRoute
+								exact
+								path="/problems"
+								component={() => (
+									<ProjectMenu
+										dishes={this.props.dishes}
+										finalTests={this.props.finalTests}
+										// fetchRecords={this.props.fetchRecords}
+									/>
+								)}
+							/>
+							{/* todo: delete later */}
+							{/* <Route
 								exact
 								path="/menu"
 								component={() => <ProjectMenu dishes={this.props.dishes} />}
-							/>
-							<Route path="/menu/:dishId" component={DishWithId} />
-							<PrivateRoute
-								exact
-								path="/favorites"
-								component={() => (
-									<Favorites
-										favorites={this.props.favorites}
-										dishes={this.props.dishes}
-										deleteFavorite={this.props.deleteFavorite}
-									/>
-								)}
-							/>
+							/> */}
 							<Route
 								exact
-								path="/contactus"
-								component={() => (
-									<Contact
-										resetFeedbackForm={this.props.resetFeedbackForm}
-										postFeedback={this.props.postFeedback}
-									/>
-								)}
+								path="/rank"
+								component={() => <Ranking ranks={this.props.ranks} />}
 							/>
 							<Redirect to="/home" />
 						</Switch>
 					</CSSTransition>
 				</TransitionGroup>
-				<Footer />
+				<Footer className="footer" />
 			</div>
 		);
 	}
