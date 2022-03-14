@@ -18,14 +18,4 @@ Structure:
 
 1. react
 
--2- server end
 
-1. firebase
-
--3- Database
-
-1. firebase database
-
----
-
----
